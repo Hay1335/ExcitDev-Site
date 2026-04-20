@@ -1,266 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExcitDev | Hub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExcitDev | Hub</title>
 
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --bg-color: #080a0f;
-            --accent-blue: #00a2ff;
-            --glow-blue: rgba(0, 162, 255, 0.4);
-            --text-color: #ffffff;
-            --glass: rgba(255, 255, 255, 0.03);
-        }
+<style>
+:root {
+    --bg-color: #080a0f;
+    --accent-blue: #00a2ff;
+    --glow-blue: rgba(0, 162, 255, 0.4);
+    --text-color: #ffffff;
+    --glass: rgba(255, 255, 255, 0.03);
+}
 
-        body {
-            background-color: var(--bg-color);
-            background-image: radial-gradient(circle at 50% 50%, #101a2b 0%, #080a0f 100%);
-            color: var(--text-color);
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
-        }
+body {
+    background-color: var(--bg-color);
+    background-image: radial-gradient(circle at 50% 50%, #101a2b 0%, #080a0f 100%);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+}
 
-        /* Navigation */
-        nav {
-            background: rgba(8, 10, 15, 0.8);
-            backdrop-filter: blur(15px);
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            border-bottom: 1px solid rgba(0, 162, 255, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+/* NAV */
+nav {
+    background: rgba(8, 10, 15, 0.8);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(0, 162, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-            margin: 0;
-            padding: 0;
-        }
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
 
-        nav a {
-            color: #888;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
+nav a {
+    color: #888;
+    text-decoration: none;
+    transition: 0.3s;
+}
 
-        nav a:hover {
-            color: var(--accent-blue);
-            text-shadow: 0 0 8px var(--glow-blue);
-        }
+nav a:hover {
+    color: var(--accent-blue);
+}
 
-        /* Hero */
-        .hero {
-            min-height: 85vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-        }
+/* HERO */
+.hero {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
 
-        .main-title {
-            font-size: clamp(3rem, 10vw, 5rem);
-            margin: 0;
-            font-weight: 800;
-            letter-spacing: -2px;
-            background: linear-gradient(180deg, #fff 0%, var(--accent-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+.main-title {
+    font-size: clamp(3rem, 10vw, 5rem);
+    font-weight: 800;
+    background: linear-gradient(180deg, #fff, var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-        .subtitle {
-            color: #aaa;
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 20px 0;
-            line-height: 1.5;
-        }
+.subtitle {
+    color: #aaa;
+    max-width: 600px;
+}
 
-        /* Status */
-        .status-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--glass);
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 1px solid rgba(0, 162, 255, 0.2);
-            margin-bottom: 30px;
-        }
+/* STATUS */
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--glass);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 162, 255, 0.2);
+    margin-bottom: 20px;
+}
 
-        .pulse {
-            width: 8px;
-            height: 8px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            animation: pulse-blue 2s infinite;
-        }
+.pulse {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-blue);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
 
-        @keyframes pulse-blue {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 162, 255, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 162, 255, 0); }
-            100% { transform: scale(0.95); }
-        }
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0,162,255,0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(0,162,255,0); }
+}
 
-        /* Buttons */
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+/* BUTTONS */
+.btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
 
-        .btn {
-            padding: 12px 28px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-        }
+.btn-primary {
+    background: var(--accent-blue);
+    color: #000;
+}
 
-        .btn-primary {
-            background: var(--accent-blue);
-            color: #000;
-        }
+.btn-secondary {
+    border: 1px solid #333;
+    color: #fff;
+}
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px var(--glow-blue);
-        }
+/* SECTIONS */
+section {
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
 
-        .btn-secondary {
-            border: 1px solid #333;
-            color: #fff;
-        }
+/* GRID */
+.servers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: #555;
-        }
+/* CARD */
+.server-card {
+    background: var(--glass);
+    border: 1px solid rgba(0, 162, 255, 0.15);
+    padding: 20px;
+    border-radius: 14px;
+    transition: 0.3s;
+}
 
-        /* Sections */
-        section {
-            padding: 80px 20px;
-            max-width: 1100px;
-            margin: auto;
-        }
+.server-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-blue);
+}
 
-        h2 {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+/* TOP BAR */
+.server-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
 
-        /* Server Cards */
-        .servers {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
+.status.online { color: #00ff9c; }
+.status.offline { color: #ff4d4d; }
+.player-count { color: #aaa; font-size: 0.8rem; }
 
-        .server-card {
-            background: var(--glass);
-            border: 1px solid rgba(0, 162, 255, 0.15);
-            padding: 20px;
-            border-radius: 12px;
-            transition: 0.3s;
-        }
+/* IP BOX */
+.ip-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    background: rgba(0,0,0,0.3);
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+}
 
-        .server-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-blue);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
+.ip-box code {
+    color: var(--accent-blue);
+}
 
-        .server-card h3 {
-            margin-top: 0;
-        }
+.ip-box button {
+    background: transparent;
+    border: 1px solid #333;
+    color: #aaa;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
 
-        .server-card p {
-            color: #aaa;
-            font-size: 0.9rem;
-        }
+.ip-box button:hover {
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+}
 
-        .server-card a {
-            display: inline-block;
-            margin-top: 10px;
-            color: var(--accent-blue);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-    </style>
+</style>
 </head>
 <body>
 
 <nav>
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#servers">Servers</a></li>
-        <li><a href="#">Socials</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#servers">Servers</a></li>
+<li><a href="#">Socials</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
 </nav>
 
 <div class="hero">
-    <div class="status-container">
-        <div class="pulse"></div>
-        <span style="font-size: 0.8rem; color: var(--accent-blue); font-weight: 700; text-transform: uppercase;">
-            Network Online
-        </span>
-    </div>
-    
-    <h1 class="main-title">EXCITDEV</h1>
+<div class="status-container">
+<div class="pulse"></div>
+<span>Network Online</span>
+</div>
 
-    <p class="subtitle">
-        I run multiple Minecraft servers and Discord communities, building custom experiences for players and developers.
-    </p>
+<h1 class="main-title">EXCITDEV</h1>
 
-    <div class="btn-group">
-        <a href="#" class="btn btn-primary">Join Main Discord</a>
-        <a href="#servers" class="btn btn-secondary">View Servers</a>
-    </div>
+<p class="subtitle">
+Minecraft & Discord network — custom experiences, communities, and events.
+</p>
 </div>
 
 <section id="servers">
-    <h2>My Servers</h2>
+<h2>My Servers</h2>
 
-    <div class="servers">
-        <div class="server-card">
-            <h3>Crystalline</h3>
-            <p>A trusted people only minecraft server</p>
-            <a href="#">Join Server →</a>
-        </div>
+<div class="servers">
 
-        <div class="server-card">
-            <h3>Streaming Server</h3>
-            <p>A server for ANYONE to join</p>
-            <a href="#">Join Server →</a>
-        </div>
+<!-- Crystalline -->
+<div class="server-card">
+<div class="server-top">
+<span class="status" id="status1">Checking...</span>
+<span class="player-count" id="players1">--/--</span>
+</div>
 
-        <div class="server-card">
-          <h3>Discord Fluffies</h3>
-           <p>Community for furries. or anyone tbh</p>
-           <a href="https://discord.gg/RrCE7MhjMU" target="_blank" rel="noopener noreferrer">
-            Join Discord →
-        </a>
-        </div>
-    </div>
+<h3>Crystalline SMP</h3>
+<p>Private survival SMP for trusted players.</p>
+
+<div class="ip-box">
+<span>Java</span>
+<code>play.excitdev.org</code>
+<button onclick="copyIP('play.excitdev.org', this)">Copy</button>
+</div>
+
+<div class="ip-box">
+<span>Bedrock</span>
+<code>play.excitdev.org:19132</code>
+<button onclick="copyIP('play.excitdev.org:19132', this)">Copy</button>
+</div>
+</div>
+
+<!-- Streaming -->
+<div class="server-card">
+<div class="server-top">
+<span class="status" id="status2">Checking...</span>
+<span class="player-count" id="players2">--/--</span>
+</div>
+
+<h3>Streaming Server</h3>
+<p>Open server for everyone.</p>
+
+<div class="ip-box">
+<span>Java</span>
+<code>play.excitdev.org</code>
+<button onclick="copyIP('play.excitdev.org', this)">Copy</button>
+</div>
+
+<div class="ip-box">
+<span>Bedrock</span>
+<code>play.excitdev.org:19132</code>
+<button onclick="copyIP('play.excitdev.org:19132', this)">Copy</button>
+</div>
+</div>
+
+<!-- Discord -->
+<div class="server-card">
+<h3>Discord Fluffies</h3>
+<p>Community for furries or anyone.</p>
+<a href="https://discord.gg/RrCE7MhjMU" target="_blank" class="btn btn-primary">Join</a>
+</div>
+
+</div>
 </section>
+
+<script>
+async function fetchStatus(ip, statusId, playerId) {
+    try {
+        const res = await fetch(`https://api.mcsrvstat.us/2/${ip}`);
+        const data = await res.json();
+
+        if (data.online) {
+            document.getElementById(statusId).textContent = "Online";
+            document.getElementById(statusId).classList.add("online");
+            document.getElementById(playerId).textContent =
+                data.players.online + "/" + data.players.max;
+        } else {
+            document.getElementById(statusId).textContent = "Offline";
+            document.getElementById(statusId).classList.add("offline");
+        }
+    } catch {
+        document.getElementById(statusId).textContent = "Error";
+    }
+}
+
+fetchStatus("play.excitdev.org", "status1", "players1");
+fetchStatus("play.excitdev.org", "status2", "players2");
+
+function copyIP(ip, btn) {
+    navigator.clipboard.writeText(ip);
+    btn.textContent = "Copied!";
+    setTimeout(() => btn.textContent = "Copy", 1200);
+}
+</script>
 
 </body>
 </html>
