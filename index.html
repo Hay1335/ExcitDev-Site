@@ -3,310 +3,885 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ExcitDev | Hub</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
+<title>ExcitDev — Minecraft Community</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root {
-    --bg-color: #080a0f;
-    --accent-blue: #00a2ff;
-    --glow-blue: rgba(0, 162, 255, 0.4);
-    --text-color: #ffffff;
-    --glass: rgba(255, 255, 255, 0.03);
-}
+  :root {
+    --void: #0a0a0f;
+    --void2: #111118;
+    --void3: #1a1a24;
+    --panel: #1e1e2e;
+    --panel2: #252535;
+    --orange: #ff6b00;
+    --orange2: #ff8c33;
+    --orange-glow: rgba(255,107,0,0.15);
+    --orange-glow2: rgba(255,107,0,0.08);
+    --text: #e8e8f0;
+    --text2: #9898b0;
+    --text3: #5a5a70;
+    --border: rgba(255,107,0,0.2);
+    --border2: rgba(255,255,255,0.06);
+    --green: #44ff88;
+    --red: #ff4444;
+    --font-display: 'Unbounded', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
 
-body {
-    background-color: var(--bg-color);
-    background-image: radial-gradient(circle at 50% 50%, #101a2b 0%, #080a0f 100%);
-    color: var(--text-color);
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-}
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
 
-/* NAV */
-nav {
-    background: rgba(8, 10, 15, 0.8);
-    backdrop-filter: blur(15px);
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    border-bottom: 1px solid rgba(0, 162, 255, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-    margin: 0;
-    padding: 0;
-}
-
-nav a {
-    color: #888;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: var(--accent-blue);
-}
-
-/* HERO */
-.hero {
-    min-height: 85vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 20px;
-}
-
-.main-title {
-    font-size: clamp(3rem, 10vw, 5rem);
-    font-weight: 800;
-    background: linear-gradient(180deg, #fff, var(--accent-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.subtitle {
-    color: #aaa;
-    max-width: 600px;
-}
-
-/* STATUS */
-.status-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--glass);
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: 1px solid rgba(0, 162, 255, 0.2);
-    margin-bottom: 20px;
-}
-
-.pulse {
-    width: 8px;
-    height: 8px;
-    background: var(--accent-blue);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(0,162,255,0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(0,162,255,0); }
-}
-
-/* BUTTONS */
-.btn {
-    padding: 10px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.btn-primary {
-    background: var(--accent-blue);
-    color: #000;
-}
-
-.btn-secondary {
-    border: 1px solid #333;
-    color: #fff;
-}
-
-/* SECTIONS */
-section {
-    padding: 80px 20px;
-    max-width: 1100px;
-    margin: auto;
-}
-
-/* GRID */
-.servers {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
-
-/* CARD */
-.server-card {
-    background: var(--glass);
-    border: 1px solid rgba(0, 162, 255, 0.15);
-    padding: 20px;
-    border-radius: 14px;
-    transition: 0.3s;
-}
-
-.server-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent-blue);
-}
-
-/* TOP BAR */
-.server-top {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.status.online { color: #00ff9c; }
-.status.offline { color: #ff4d4d; }
-.player-count { color: #aaa; font-size: 0.8rem; }
-
-/* IP BOX */
-.ip-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    background: rgba(0,0,0,0.3);
-    padding: 8px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-}
-
-.ip-box code {
-    color: var(--accent-blue);
-}
-
-.ip-box button {
-    background: transparent;
-    border: 1px solid #333;
-    color: #aaa;
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,15,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 900;
+    color: var(--orange);
+    letter-spacing: -0.5px;
     cursor: pointer;
-    border-radius: 6px;
-    padding: 4px 8px;
-}
+  }
+  .nav-logo span { color: var(--text2); font-weight: 400; }
+  .nav-links { display: flex; gap: 0.5rem; align-items: center; }
+  .nav-link {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text2); text-decoration: none;
+    padding: 6px 14px; border-radius: 4px;
+    border: 1px solid transparent;
+    cursor: pointer; transition: all 0.2s;
+    background: none;
+  }
+  .nav-link:hover, .nav-link.active {
+    color: var(--orange);
+    border-color: var(--border);
+    background: var(--orange-glow2);
+  }
+  .nav-btn {
+    font-family: var(--font-mono); font-size: 12px;
+    background: var(--orange); color: #000;
+    border: none; padding: 8px 16px; border-radius: 4px;
+    cursor: pointer; font-weight: 700;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { background: var(--orange2); transform: translateY(-1px); }
 
-.ip-box button:hover {
-    color: var(--accent-blue);
-    border-color: var(--accent-blue);
-}
+  /* HERO */
+  .hero {
+    min-height: 90vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(255,107,0,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,107,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,107,0,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+    padding: 4px 14px; border-radius: 2px;
+    display: inline-block;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -2px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title .accent { color: var(--orange); display: block; }
+  .hero-sub {
+    font-size: 14px; color: var(--text2);
+    max-width: 480px; margin: 0 auto 2.5rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--orange); color: #000;
+    border: none; padding: 14px 28px;
+    font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+    border-radius: 4px; cursor: pointer;
+    transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--orange2); transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border2); padding: 14px 28px;
+    font-family: var(--font-mono); font-size: 13px;
+    border-radius: 4px; cursor: pointer;
+    transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-secondary:hover {
+    border-color: var(--border);
+    color: var(--orange);
+    background: var(--orange-glow2);
+  }
 
+  /* STATUS CARD */
+  .status-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin: 3rem auto 0;
+    max-width: 480px;
+    display: flex; align-items: center; gap: 1.5rem;
+    position: relative;
+  }
+  .status-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .status-dot.online { background: var(--green); box-shadow: 0 0 8px var(--green); }
+  .status-dot.offline { background: var(--red); }
+  .status-info { flex: 1; text-align: left; }
+  .status-label { font-size: 11px; color: var(--text3); letter-spacing: 1px; text-transform: uppercase; }
+  .status-value { font-family: var(--font-display); font-size: 14px; font-weight: 700; }
+  .status-ip {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--orange); cursor: pointer;
+    border: 1px solid var(--border);
+    padding: 6px 12px; border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .status-ip:hover { background: var(--orange-glow); }
+
+  /* SUBDOMAIN BUTTONS */
+  .subdomain-strip {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    padding: 2rem;
+    border-top: 1px solid var(--border2);
+    border-bottom: 1px solid var(--border2);
+    background: var(--void2);
+  }
+  .subdomain-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--panel); border: 1px solid var(--border2);
+    color: var(--text2); padding: 10px 20px;
+    border-radius: 4px; cursor: pointer;
+    font-family: var(--font-mono); font-size: 12px;
+    transition: all 0.2s; text-decoration: none;
+  }
+  .subdomain-btn:hover {
+    border-color: var(--border);
+    color: var(--orange);
+    background: var(--orange-glow2);
+  }
+  .subdomain-btn .icon { font-size: 16px; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 900; letter-spacing: -1px;
+    margin-bottom: 1rem; line-height: 1.1;
+  }
+  .section-sub { color: var(--text2); max-width: 500px; margin-bottom: 3rem; }
+
+  /* GRID */
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+
+  /* CARD */
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border); }
+  .card-icon { font-size: 24px; margin-bottom: 1rem; }
+  .card-title { font-family: var(--font-display); font-size: 14px; font-weight: 700; margin-bottom: 0.5rem; }
+  .card-text { color: var(--text2); font-size: 13px; }
+
+  /* CONTROL ROOM */
+  .control-room {
+    background: var(--void2);
+    border-top: 1px solid var(--border2);
+    border-bottom: 1px solid var(--border2);
+  }
+  .ctrl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--border2); border: 1px solid var(--border2); border-radius: 8px; overflow: hidden; }
+  .ctrl-item {
+    background: var(--panel2);
+    padding: 1.5rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .ctrl-item:hover { background: var(--panel); }
+  .ctrl-item-label { font-size: 11px; color: var(--text3); letter-spacing: 1px; text-transform: uppercase; }
+  .ctrl-item-value { font-family: var(--font-display); font-size: 18px; font-weight: 700; }
+  .ctrl-item-action { font-size: 11px; color: var(--orange); }
+
+  /* RULES */
+  .rules-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .rules-list li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    background: var(--panel); border: 1px solid var(--border2);
+    border-radius: 6px; padding: 1rem 1.25rem;
+  }
+  .rule-num {
+    font-family: var(--font-display); font-size: 11px; font-weight: 700;
+    color: var(--orange); min-width: 28px; margin-top: 2px;
+  }
+  .rule-text { font-size: 13px; color: var(--text2); }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid var(--border2); }
+  .faq-q {
+    width: 100%; text-align: left; background: none; border: none;
+    color: var(--text); font-family: var(--font-mono); font-size: 13px;
+    padding: 1.25rem 0; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: color 0.2s;
+  }
+  .faq-q:hover { color: var(--orange); }
+  .faq-q .arrow { color: var(--text3); transition: transform 0.2s; font-size: 12px; }
+  .faq-q.open .arrow { transform: rotate(180deg); color: var(--orange); }
+  .faq-a {
+    color: var(--text2); font-size: 13px;
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.2s;
+    padding-bottom: 0;
+  }
+  .faq-a.open { max-height: 200px; padding-bottom: 1.25rem; }
+
+  /* CONTACT FORM */
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.25rem; }
+  .form-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); }
+  .form-input, .form-textarea, .form-select {
+    background: var(--panel2); border: 1px solid var(--border2);
+    color: var(--text); font-family: var(--font-mono); font-size: 13px;
+    padding: 10px 14px; border-radius: 4px;
+    transition: border-color 0.2s; outline: none;
+    width: 100%;
+  }
+  .form-textarea { resize: vertical; min-height: 100px; }
+  .form-select { cursor: pointer; }
+  .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--orange); }
+  .form-submit {
+    background: var(--orange); color: #000;
+    border: none; padding: 12px 24px;
+    font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+    border-radius: 4px; cursor: pointer;
+    transition: all 0.2s; width: 100%;
+  }
+  .form-submit:hover { background: var(--orange2); }
+  .form-success {
+    display: none; text-align: center; padding: 2rem;
+    color: var(--green); font-family: var(--font-display); font-size: 14px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--void2);
+    border-top: 1px solid var(--border2);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: var(--font-display); font-size: 22px; font-weight: 900;
+    color: var(--orange); margin-bottom: 1rem;
+  }
+  .footer-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
+  .footer-link { color: var(--text3); font-size: 12px; cursor: pointer; transition: color 0.2s; text-decoration: none; }
+  .footer-link:hover { color: var(--orange); }
+  .footer-copy { color: var(--text3); font-size: 11px; }
+  .footer-subdomain { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 2rem; right: 2rem;
+    background: var(--panel); border: 1px solid var(--border);
+    color: var(--text); padding: 12px 20px; border-radius: 6px;
+    font-size: 13px; z-index: 999;
+    transform: translateY(100px); opacity: 0;
+    transition: all 0.3s;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* SERVER PAGE */
+  .server-hero {
+    padding: 5rem 2rem 3rem;
+    text-align: center;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,107,0,0.1) 0%, transparent 60%);
+    border-bottom: 1px solid var(--border2);
+  }
+  .big-status {
+    display: inline-flex; align-items: center; gap: 1rem;
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 1.5rem 2.5rem; border-radius: 8px;
+    margin: 2rem auto;
+  }
+  .big-status-dot { width: 14px; height: 14px; border-radius: 50%; }
+  .big-status-text { font-family: var(--font-display); font-size: 18px; font-weight: 700; }
+  .copy-ip-btn {
+    background: var(--orange); color: #000;
+    border: none; padding: 10px 20px;
+    font-family: var(--font-mono); font-size: 14px; font-weight: 700;
+    border-radius: 4px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: all 0.2s; margin-top: 1rem;
+  }
+  .copy-ip-btn:hover { background: var(--orange2); }
+
+  /* HELP PAGE */
+  .doc-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .doc-card {
+    background: var(--panel); border: 1px solid var(--border2);
+    border-radius: 8px; padding: 1.5rem;
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none; display: block;
+  }
+  .doc-card:hover { border-color: var(--border); transform: translateY(-2px); }
+  .doc-card-icon { font-size: 28px; margin-bottom: 0.75rem; }
+  .doc-card-title { font-family: var(--font-display); font-size: 13px; font-weight: 700; margin-bottom: 0.5rem; }
+  .doc-card-desc { font-size: 12px; color: var(--text2); }
+
+  /* PLAYER LIST */
+  .player-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .player-tag {
+    background: var(--panel2); border: 1px solid var(--border2);
+    padding: 4px 10px; border-radius: 3px; font-size: 12px; color: var(--text2);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .player-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; }
+
+  @media (max-width: 600px) {
+    .hero-title { letter-spacing: -1px; }
+    nav { padding: 0 1rem; }
+    .nav-logo span { display: none; }
+  }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-<ul>
-<li><a href="#">Home</a></li>
-<li><a href="#servers">Servers</a></li>
-<li><a href="#">Socials</a></li>
-<li><a href="#">Contact</a></li>
-</ul>
+  <div class="nav-logo" onclick="showPage('home')">EXCIT<span>DEV</span></div>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showPage('home')" id="nav-home">Home</button>
+    <button class="nav-link" onclick="showPage('server')" id="nav-server">Server</button>
+    <button class="nav-link" onclick="showPage('help')" id="nav-help">Help</button>
+    <button class="nav-btn" onclick="copyIP()">Copy IP</button>
+  </div>
 </nav>
 
-<div class="hero">
-<div class="status-container">
-<div class="pulse"></div>
-<span>Network Online</span>
+<!-- ===== HOME PAGE ===== -->
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-tag">⛏ Minecraft Community</div>
+    <h1 class="hero-title">
+      BUILD. EXPLORE.
+      <span class="accent">EXCITE.</span>
+    </h1>
+    <p class="hero-sub">Join the ExcitDev Minecraft community. Survival, creative, and more — all on one server built by players, for players.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="copyIP()">▶ Join Now — excitdev.org</button>
+      <button class="btn-secondary" onclick="showPage('server')">Server Info →</button>
+    </div>
+
+    <div class="status-card">
+      <div class="status-dot" id="hero-status-dot"></div>
+      <div class="status-info">
+        <div class="status-label">Server Status</div>
+        <div class="status-value" id="hero-status-text">Checking...</div>
+        <div style="font-size:12px; color: var(--text3); margin-top:2px" id="hero-players"></div>
+      </div>
+      <div class="status-ip" onclick="copyIP()">excitdev.org</div>
+    </div>
+  </section>
+
+  <div class="subdomain-strip">
+    <a href="https://map.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">🗺</span> FluffyMap</a>
+    <a href="https://stats.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">📊</span> Stats</a>
+    <a href="https://discord.gg/excitdev" target="_blank" class="subdomain-btn"><span class="icon">💬</span> Discord</a>
+    <a href="https://shop.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">🛒</span> Shop</a>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="section-tag">// What we offer</div>
+      <h2 class="section-title">A world worth<br>logging into</h2>
+      <p class="section-sub">Carefully crafted game modes, active staff, and a community that actually cares.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">🏔</div>
+          <div class="card-title">Survival</div>
+          <div class="card-text">Classic survival with land claiming, shops, and a living economy. Your base, your rules.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎨</div>
+          <div class="card-title">Creative</div>
+          <div class="card-text">Unlimited plots, WorldEdit access, and weekly build contests with real prizes.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚔️</div>
+          <div class="card-title">Mini-Games</div>
+          <div class="card-text">Skyblock, BedWars, Spleef, and more. New games added by community vote.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🗺</div>
+          <div class="card-title">Live Map</div>
+          <div class="card-text">FluffyMap shows the entire world in real-time. Find your friends, discover new builds.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <div class="card-title">Player Stats</div>
+          <div class="card-text">Track your playtime, kills, blocks mined, and leaderboard rank on our stats dashboard.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛡</div>
+          <div class="card-title">Active Staff</div>
+          <div class="card-text">24/7 moderation, fast ticket response, and zero tolerance for griefers and hackers.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="control-room">
+    <div class="container">
+      <div class="section-tag">// Quick stats</div>
+      <h2 class="section-title" style="margin-bottom:2rem">Control Room</h2>
+      <div class="ctrl-grid">
+        <div class="ctrl-item" onclick="copyIP()">
+          <div class="ctrl-item-label">Server IP</div>
+          <div class="ctrl-item-value" style="color:var(--orange)">excitdev.org</div>
+          <div class="ctrl-item-action">Click to copy</div>
+        </div>
+        <div class="ctrl-item">
+          <div class="ctrl-item-label">Version</div>
+          <div class="ctrl-item-value" id="ctrl-version">—</div>
+          <div class="ctrl-item-action" id="ctrl-version-sub">Loading...</div>
+        </div>
+        <div class="ctrl-item">
+          <div class="ctrl-item-label">Players Online</div>
+          <div class="ctrl-item-value" id="ctrl-players">—</div>
+          <div class="ctrl-item-action" id="ctrl-players-sub">Loading...</div>
+        </div>
+        <div class="ctrl-item" onclick="showPage('help')">
+          <div class="ctrl-item-label">Need Help?</div>
+          <div class="ctrl-item-value">Help Desk</div>
+          <div class="ctrl-item-action">View docs & FAQ →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="max-width: 700px">
+      <div class="section-tag">// Contact us</div>
+      <h2 class="section-title">Get in touch</h2>
+      <p class="section-sub">Bug report, ban appeal, staff application, or just a question? We read everything.</p>
+      <div id="contact-form-home">
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">Name</label>
+            <input class="form-input" type="text" placeholder="Your Minecraft username" id="cf-name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" placeholder="your@email.com" id="cf-email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Topic</label>
+          <select class="form-select" id="cf-topic">
+            <option value="">Select a topic...</option>
+            <option>Bug Report</option>
+            <option>Ban Appeal</option>
+            <option>Staff Application</option>
+            <option>General Question</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Describe your issue or question..." id="cf-message"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitContact()">Send Message →</button>
+      </div>
+      <div class="form-success" id="contact-success">
+        ✓ Message received! We'll get back to you within 24 hours.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">EXCITDEV</div>
+    <div class="footer-subdomain">
+      <a href="https://map.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">🗺</span> FluffyMap</a>
+      <a href="https://stats.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">📊</span> Stats</a>
+      <a href="https://discord.gg/excitdev" target="_blank" class="subdomain-btn"><span class="icon">💬</span> Discord</a>
+    </div>
+    <div class="footer-links">
+      <a class="footer-link" onclick="showPage('home')">Home</a>
+      <a class="footer-link" onclick="showPage('server')">Server</a>
+      <a class="footer-link" onclick="showPage('help')">Help</a>
+    </div>
+    <div class="footer-copy">© 2025 ExcitDev. Not affiliated with Mojang or Microsoft.</div>
+  </footer>
 </div>
 
-<h1 class="main-title">EXCITDEV</h1>
+<!-- ===== SERVER PAGE ===== -->
+<div class="page" id="page-server">
+  <div class="server-hero">
+    <div class="section-tag">// Server Status</div>
+    <h1 class="section-title" style="font-size:2.5rem">excitdev.org</h1>
 
-<p class="subtitle">
-Minecraft & Discord network — custom experiences, communities, and events.
-</p>
+    <div class="big-status" id="big-status">
+      <div class="big-status-dot" id="server-dot"></div>
+      <div>
+        <div class="big-status-text" id="server-status-text">Checking...</div>
+        <div style="font-size:12px; color:var(--text3)" id="server-motd"></div>
+      </div>
+    </div>
+
+    <br>
+    <button class="copy-ip-btn" onclick="copyIP()">
+      📋 Copy IP — excitdev.org
+    </button>
+
+    <div class="subdomain-strip" style="margin-top:2rem; border-radius:8px">
+      <a href="https://map.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">🗺</span> FluffyMap</a>
+      <a href="https://stats.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">📊</span> Stats</a>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <div class="section-tag">// Online Players</div>
+          <h2 class="section-title" style="font-size:1.5rem; margin-bottom:1.5rem">Who's online</h2>
+          <div class="player-list" id="player-list">
+            <div style="color:var(--text3); font-size:13px">Loading player list...</div>
+          </div>
+        </div>
+        <div>
+          <div class="section-tag">// Server Info</div>
+          <h2 class="section-title" style="font-size:1.5rem; margin-bottom:1.5rem">Specs</h2>
+          <div style="display:flex;flex-direction:column;gap:0.75rem">
+            <div class="ctrl-item" style="border-radius:6px">
+              <div class="ctrl-item-label">Version</div>
+              <div class="ctrl-item-value" id="info-version">Loading...</div>
+            </div>
+            <div class="ctrl-item" style="border-radius:6px">
+              <div class="ctrl-item-label">Players</div>
+              <div class="ctrl-item-value" id="info-players">Loading...</div>
+            </div>
+            <div class="ctrl-item" style="border-radius:6px">
+              <div class="ctrl-item-label">Last checked</div>
+              <div class="ctrl-item-value" id="info-checked" style="font-size:13px">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="container" style="max-width:700px">
+      <div class="section-tag">// Rules</div>
+      <h2 class="section-title" style="margin-bottom:1.5rem">Server Rules</h2>
+      <ul class="rules-list">
+        <li><span class="rule-num">#1</span><span class="rule-text">No griefing, stealing, or destroying other players' builds or property.</span></li>
+        <li><span class="rule-num">#2</span><span class="rule-text">No hacking, cheating, or using unauthorized mods that give unfair advantages.</span></li>
+        <li><span class="rule-num">#3</span><span class="rule-text">Be respectful in chat. No harassment, hate speech, or excessive profanity.</span></li>
+        <li><span class="rule-num">#4</span><span class="rule-text">No spamming, advertising other servers, or posting inappropriate content.</span></li>
+        <li><span class="rule-num">#5</span><span class="rule-text">No exploiting bugs or glitches. Report them to staff immediately.</span></li>
+        <li><span class="rule-num">#6</span><span class="rule-text">Listen to staff. Their decisions are final. Disputes go through the help desk.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">EXCITDEV</div>
+    <div class="footer-links">
+      <a class="footer-link" onclick="showPage('home')">Home</a>
+      <a class="footer-link" onclick="showPage('server')">Server</a>
+      <a class="footer-link" onclick="showPage('help')">Help</a>
+    </div>
+    <div class="footer-copy">© 2025 ExcitDev. Not affiliated with Mojang or Microsoft.</div>
+  </footer>
 </div>
 
-<section id="servers">
-<h2>My Servers</h2>
+<!-- ===== HELP PAGE ===== -->
+<div class="page" id="page-help">
+  <section style="padding-bottom:2rem">
+    <div class="container">
+      <div class="section-tag">// Help Center</div>
+      <h1 class="section-title">How can we help?</h1>
+      <p class="section-sub">Documentation, FAQ, and support resources for ExcitDev players.</p>
 
-<div class="servers">
+      <div class="doc-cards" style="margin-bottom:3rem">
+        <div class="doc-card">
+          <div class="doc-card-icon">🚀</div>
+          <div class="doc-card-title">Getting Started</div>
+          <div class="doc-card-desc">How to connect, choose your game mode, and get your first base set up.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card-icon">🏠</div>
+          <div class="doc-card-title">Land Claiming</div>
+          <div class="doc-card-desc">Protect your builds with our land claiming system. Step-by-step guide.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card-icon">💰</div>
+          <div class="doc-card-title">Economy Guide</div>
+          <div class="doc-card-desc">Trading, the player market, and how to earn and spend in-game currency.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card-icon">🛡</div>
+          <div class="doc-card-title">Ranks & Perks</div>
+          <div class="doc-card-desc">Free and donor ranks explained. What each rank unlocks and how to earn them.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card-icon">⚠️</div>
+          <div class="doc-card-title">Ban Appeals</div>
+          <div class="doc-card-desc">Think you were wrongly banned? Submit an appeal using our contact form.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card-icon">📋</div>
+          <div class="doc-card-title">Staff Applications</div>
+          <div class="doc-card-desc">Want to join the team? Read the requirements and apply through our form.</div>
+        </div>
+      </div>
 
-<!-- Crystalline -->
-<div class="server-card">
-<div class="server-top">
-<span class="status" id="status1">Checking...</span>
-<span class="player-count" id="players1">--/--</span>
+      <div class="section-tag">// FAQ</div>
+      <h2 class="section-title" style="font-size:1.75rem; margin-bottom:1.5rem">Frequently Asked Questions</h2>
+      <div id="faq" style="max-width:700px">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What version does the server run? <span class="arrow">▼</span></button>
+          <div class="faq-a">The server runs the latest stable Java Edition release. We update within a few weeks of each major Minecraft version to ensure plugin compatibility.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Is the server free to play? <span class="arrow">▼</span></button>
+          <div class="faq-a">Yes, ExcitDev is completely free to join. We offer optional donor ranks that support server costs and provide cosmetic perks — no pay-to-win mechanics.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How do I claim land to protect my base? <span class="arrow">▼</span></button>
+          <div class="faq-a">Use a golden shovel to mark two corners of your claim area. You start with 500 claim blocks and earn more by playing. Type /claimslist to see your claims.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">The server shows offline — is it down? <span class="arrow">▼</span></button>
+          <div class="faq-a">If no Minecraft server is running at excitdev.org yet, it will show as offline. Check our Discord for announcements about launch dates and maintenance windows.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How do I apply to become a staff member? <span class="arrow">▼</span></button>
+          <div class="faq-a">Use the contact form below and select "Staff Application" as the topic. Include your age, time zone, past moderation experience, and how many hours a week you can commit.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Where can I see the live world map? <span class="arrow">▼</span></button>
+          <div class="faq-a">Visit map.excitdev.org to see FluffyMap — a live, interactive overhead map of the entire server world. You can see player locations, claimed land, and biomes.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I use mods or texture packs? <span class="arrow">▼</span></button>
+          <div class="faq-a">Optifine, Sodium, and approved performance mods are fine. X-ray, auto-clickers, and any mods that provide unfair game advantages are strictly banned.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--void2); border-top:1px solid var(--border2); padding-top:4rem">
+    <div class="container" style="max-width:700px">
+      <div class="section-tag">// Support</div>
+      <h2 class="section-title" style="margin-bottom:0.5rem">Still need help?</h2>
+      <p class="section-sub">Send us a message and we'll get back to you within 24 hours.</p>
+      <div id="help-form">
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">Minecraft Username</label>
+            <input class="form-input" type="text" placeholder="YourUsername" id="hf-name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" placeholder="your@email.com" id="hf-email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Issue Type</label>
+          <select class="form-select" id="hf-topic">
+            <option value="">Select a topic...</option>
+            <option>Bug Report</option>
+            <option>Ban Appeal</option>
+            <option>Staff Application</option>
+            <option>Grief Report</option>
+            <option>General Question</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Describe your issue in as much detail as possible..." id="hf-message"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitHelp()">Submit Ticket →</button>
+      </div>
+      <div class="form-success" id="help-success">
+        ✓ Ticket submitted! We'll get back to you within 24 hours.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">EXCITDEV</div>
+    <div class="footer-links">
+      <a class="footer-link" onclick="showPage('home')">Home</a>
+      <a class="footer-link" onclick="showPage('server')">Server</a>
+      <a class="footer-link" onclick="showPage('help')">Help</a>
+    </div>
+    <div class="footer-copy">© 2025 ExcitDev. Not affiliated with Mojang or Microsoft.</div>
+  </footer>
 </div>
 
-<h3>Crystalline SMP</h3>
-<p>Private survival SMP for trusted players.</p>
-
-<div class="ip-box">
-<span>Java</span>
-<code>play.excitdev.org</code>
-<button onclick="copyIP('play.excitdev.org', this)">Copy</button>
-</div>
-
-<div class="ip-box">
-<span>Bedrock</span>
-<code>play.excitdev.org:19132</code>
-<button onclick="copyIP('play.excitdev.org:19132', this)">Copy</button>
-</div>
-</div>
-
-<!-- Streaming -->
-<div class="server-card">
-<div class="server-top">
-<span class="status" id="status2">Checking...</span>
-<span class="player-count" id="players2">--/--</span>
-</div>
-
-<h3>Streaming Server</h3>
-<p>Open server for everyone.</p>
-
-<div class="ip-box">
-<span>Java</span>
-<code>play.excitdev.org</code>
-<button onclick="copyIP('play.excitdev.org', this)">Copy</button>
-</div>
-
-<div class="ip-box">
-<span>Bedrock</span>
-<code>play.excitdev.org:19132</code>
-<button onclick="copyIP('play.excitdev.org:19132', this)">Copy</button>
-</div>
-</div>
-
-<!-- Discord -->
-<div class="server-card">
-<h3>Discord Fluffies</h3>
-<p>Community for furries or anyone.</p>
-<a href="https://discord.gg/RrCE7MhjMU" target="_blank" class="btn btn-primary">Join</a>
-</div>
-
-</div>
-</section>
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script>
-async function fetchStatus(ip, statusId, playerId) {
-    try {
-        const res = await fetch(`https://api.mcsrvstat.us/2/${ip}`);
-        const data = await res.json();
+// PAGE NAVIGATION
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.getElementById('nav-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+}
 
-        if (data.online) {
-            document.getElementById(statusId).textContent = "Online";
-            document.getElementById(statusId).classList.add("online");
-            document.getElementById(playerId).textContent =
-                data.players.online + "/" + data.players.max;
-        } else {
-            document.getElementById(statusId).textContent = "Offline";
-            document.getElementById(statusId).classList.add("offline");
-        }
-    } catch {
-        document.getElementById(statusId).textContent = "Error";
+// TOAST
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// COPY IP
+function copyIP() {
+  navigator.clipboard.writeText('excitdev.org').then(() => showToast('✓ IP copied: excitdev.org'));
+}
+
+// FAQ ACCORDION
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.faq-q').forEach(b => {
+    b.classList.remove('open');
+    b.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    btn.classList.add('open');
+    answer.classList.add('open');
+  }
+}
+
+// CONTACT FORMS
+function submitContact() {
+  const name = document.getElementById('cf-name').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const msg = document.getElementById('cf-message').value.trim();
+  if (!name || !email || !msg) { showToast('⚠ Please fill in all fields'); return; }
+  document.getElementById('contact-form-home').style.display = 'none';
+  document.getElementById('contact-success').style.display = 'block';
+}
+function submitHelp() {
+  const name = document.getElementById('hf-name').value.trim();
+  const email = document.getElementById('hf-email').value.trim();
+  const msg = document.getElementById('hf-message').value.trim();
+  if (!name || !email || !msg) { showToast('⚠ Please fill in all fields'); return; }
+  document.getElementById('help-form').style.display = 'none';
+  document.getElementById('help-success').style.display = 'block';
+}
+
+// SERVER STATUS (live via mcsrvstat.us API)
+async function fetchStatus() {
+  try {
+    const res = await fetch('https://api.mcsrvstat.us/3/excitdev.org');
+    const data = await res.json();
+    const online = data.online === true;
+    const players = data.players ? data.players.online : 0;
+    const max = data.players ? data.players.max : 0;
+    const version = data.version || 'Unknown';
+    const motd = data.motd && data.motd.clean ? data.motd.clean[0] : '';
+    const playerNames = data.players && data.players.list ? data.players.list.map(p => p.name || p) : [];
+
+    // Hero status
+    const dot = document.getElementById('hero-status-dot');
+    dot.className = 'status-dot ' + (online ? 'online' : 'offline');
+    document.getElementById('hero-status-text').textContent = online ? 'Online' : 'Offline';
+    document.getElementById('hero-players').textContent = online ? players + ' / ' + max + ' players online' : 'Server is offline';
+
+    // Server page
+    const sdot = document.getElementById('server-dot');
+    sdot.style.background = online ? 'var(--green)' : 'var(--red)';
+    if (online) sdot.style.boxShadow = '0 0 8px var(--green)';
+    document.getElementById('server-status-text').textContent = online ? 'Online' : 'Offline';
+    document.getElementById('server-motd').textContent = motd;
+    document.getElementById('info-version').textContent = version;
+    document.getElementById('info-players').textContent = players + ' / ' + max;
+    document.getElementById('info-checked').textContent = new Date().toLocaleTimeString();
+
+    // Player list
+    const pl = document.getElementById('player-list');
+    if (playerNames.length > 0) {
+      pl.innerHTML = playerNames.map(n => `<div class="player-tag"><div class="player-dot"></div>${n}</div>`).join('');
+    } else {
+      pl.innerHTML = online ? '<div style="color:var(--text3);font-size:13px">No players listed (API may not expose names)</div>'
+                           : '<div style="color:var(--text3);font-size:13px">Server offline</div>';
     }
+
+    // Control room
+    document.getElementById('ctrl-version').textContent = version;
+    document.getElementById('ctrl-version-sub').textContent = online ? 'Java Edition' : 'Offline';
+    document.getElementById('ctrl-players').textContent = online ? players + '/' + max : '—';
+    document.getElementById('ctrl-players-sub').textContent = online ? 'players online now' : 'Server offline';
+
+  } catch(e) {
+    ['hero-status-text','server-status-text'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = 'Could not reach API';
+    });
+  }
 }
 
-fetchStatus("play.excitdev.org", "status1", "players1");
-fetchStatus("play.excitdev.org", "status2", "players2");
-
-function copyIP(ip, btn) {
-    navigator.clipboard.writeText(ip);
-    btn.textContent = "Copied!";
-    setTimeout(() => btn.textContent = "Copy", 1200);
-}
+fetchStatus();
+setInterval(fetchStatus, 30000);
 </script>
-
 </body>
 </html>
