@@ -6,7 +6,7 @@
 <title>ExcitDev — Minecraft Community</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Space+Mono:wght@400;700&family=Fredoka+One&display=swap" rel="stylesheet">
 <style>
   :root {
     --void: #0a0a0f;
@@ -399,8 +399,9 @@
   <div class="nav-links">
     <button class="nav-link active" onclick="showPage('home')" id="nav-home">Home</button>
     <button class="nav-link" onclick="showPage('server')" id="nav-server">Server</button>
+    <button class="nav-link" onclick="showPage('discord')" id="nav-discord">Discord</button>
     <button class="nav-link" onclick="showPage('help')" id="nav-help">Help</button>
-    <button class="nav-btn" onclick="copyIP()">Copy IP</button>
+    <button class="nav-btn" onclick="copyJavaIP()">Copy IP</button>
   </div>
 </nav>
 
@@ -416,8 +417,8 @@
     </h1>
     <p class="hero-sub">Join the ExcitDev Minecraft community. Survival, creative, and more — all on one server built by players, for players.</p>
     <div class="hero-actions">
-      <button class="btn-primary" onclick="copyIP()">▶ Join Now — excitdev.org</button>
-      <button class="btn-secondary" onclick="showPage('server')">Server Info →</button>
+      <button class="btn-primary" onclick="copyJavaIP()">☕ Java — written-path.gl.joinmc.link</button>
+      <button class="btn-secondary" onclick="copyBedrockIP()">📱 Bedrock — Copy IP</button>
     </div>
 
     <div class="status-card">
@@ -427,14 +428,17 @@
         <div class="status-value" id="hero-status-text">Checking...</div>
         <div style="font-size:12px; color: var(--text3); margin-top:2px" id="hero-players"></div>
       </div>
-      <div class="status-ip" onclick="copyIP()">excitdev.org</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div class="status-ip" onclick="copyJavaIP()" title="Java IP">☕ Java</div>
+        <div class="status-ip" onclick="copyBedrockIP()" title="Bedrock IP">📱 Bedrock</div>
+      </div>
     </div>
   </section>
 
   <div class="subdomain-strip">
-    <a href="https://map.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">🗺</span> FluffyMap</a>
+    <a href="https://fluffymap.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">🗺</span> FluffyMap</a>
     <a href="https://stats.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">📊</span> Stats</a>
-    <a href="https://discord.gg/excitdev" target="_blank" class="subdomain-btn"><span class="icon">💬</span> Discord</a>
+    <button class="subdomain-btn" onclick="showPage('discord')"><span class="icon">💬</span> Discord</button>
     <a href="https://shop.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">🛒</span> Shop</a>
   </div>
 
@@ -483,15 +487,15 @@
       <div class="section-tag">// Quick stats</div>
       <h2 class="section-title" style="margin-bottom:2rem">Control Room</h2>
       <div class="ctrl-grid">
-        <div class="ctrl-item" onclick="copyIP()">
-          <div class="ctrl-item-label">Server IP</div>
-          <div class="ctrl-item-value" style="color:var(--orange)">excitdev.org</div>
+        <div class="ctrl-item" onclick="copyJavaIP()">
+          <div class="ctrl-item-label">Java IP</div>
+          <div class="ctrl-item-value" style="color:var(--orange);font-size:11px">written-path.gl.joinmc.link</div>
           <div class="ctrl-item-action">Click to copy</div>
         </div>
-        <div class="ctrl-item">
-          <div class="ctrl-item-label">Version</div>
-          <div class="ctrl-item-value" id="ctrl-version">—</div>
-          <div class="ctrl-item-action" id="ctrl-version-sub">Loading...</div>
+        <div class="ctrl-item" onclick="copyBedrockIP()">
+          <div class="ctrl-item-label">Bedrock IP + Port</div>
+          <div class="ctrl-item-value" style="color:var(--orange);font-size:11px">addition-commissions.gl.at.ply.gg</div>
+          <div class="ctrl-item-action">Port: 21702 — Click to copy</div>
         </div>
         <div class="ctrl-item">
           <div class="ctrl-item-label">Players Online</div>
@@ -549,13 +553,14 @@
   <footer>
     <div class="footer-logo">EXCITDEV</div>
     <div class="footer-subdomain">
-      <a href="https://map.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">🗺</span> FluffyMap</a>
+      <a href="https://fluffymap.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">🗺</span> FluffyMap</a>
       <a href="https://stats.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">📊</span> Stats</a>
-      <a href="https://discord.gg/excitdev" target="_blank" class="subdomain-btn"><span class="icon">💬</span> Discord</a>
+      <button class="subdomain-btn" onclick="showPage('discord')"><span class="icon">💬</span> Discord</button>
     </div>
     <div class="footer-links">
       <a class="footer-link" onclick="showPage('home')">Home</a>
       <a class="footer-link" onclick="showPage('server')">Server</a>
+      <a class="footer-link" onclick="showPage('discord')">Discord</a>
       <a class="footer-link" onclick="showPage('help')">Help</a>
     </div>
     <div class="footer-copy">© 2025 ExcitDev. Not affiliated with Mojang or Microsoft.</div>
@@ -564,54 +569,73 @@
 
 <!-- ===== SERVER PAGE ===== -->
 <div class="page" id="page-server">
-  <div class="server-hero">
-    <div class="section-tag">// Server Status</div>
-    <h1 class="section-title" style="font-size:2.5rem">excitdev.org</h1>
 
-    <div class="big-status" id="big-status">
-      <div class="big-status-dot" id="server-dot"></div>
-      <div>
-        <div class="big-status-text" id="server-status-text">Checking...</div>
-        <div style="font-size:12px; color:var(--text3)" id="server-motd"></div>
+  <!-- big status banner -->
+  <div style="background:var(--void2); border-bottom:1px solid var(--border2); padding:3rem 2rem 0; text-align:center">
+    <div class="section-tag">// Live Status</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(1.8rem,5vw,3rem);font-weight:900;letter-spacing:-1px;margin-bottom:1.5rem">ExcitDev Server</h1>
+
+    <!-- status pill -->
+    <div style="display:inline-flex;align-items:center;gap:0.75rem;background:var(--panel);border:1px solid var(--border);padding:0.75rem 1.5rem;border-radius:100px;margin-bottom:1.5rem">
+      <div class="big-status-dot" id="server-dot" style="width:10px;height:10px;border-radius:50%;background:var(--text3)"></div>
+      <span style="font-family:var(--font-display);font-size:13px;font-weight:700" id="server-status-text">Checking...</span>
+      <span style="color:var(--text3);font-size:12px" id="server-motd"></span>
+    </div>
+
+    <!-- two IP cards side by side -->
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem">
+      <div onclick="copyJavaIP()" style="background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.75rem;cursor:pointer;text-align:left;min-width:220px;transition:background 0.2s" onmouseover="this.style.background='var(--panel2)'" onmouseout="this.style.background='var(--panel)'">
+        <div style="font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:0.4rem">☕ Java Edition</div>
+        <div style="font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--orange);word-break:break-all">written-path.gl.joinmc.link</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:0.4rem">Click to copy IP</div>
+      </div>
+      <div onclick="copyBedrockIP()" style="background:var(--panel);border:1px solid var(--border2);border-radius:10px;padding:1.25rem 1.75rem;cursor:pointer;text-align:left;min-width:220px;transition:background 0.2s" onmouseover="this.style.background='var(--panel2)'" onmouseout="this.style.background='var(--panel)'">
+        <div style="font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:0.4rem">📱 Bedrock Edition</div>
+        <div style="font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--orange2);word-break:break-all">addition-commissions.gl.at.ply.gg</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:0.4rem">Port: 21702 — Click to copy</div>
       </div>
     </div>
 
-    <br>
-    <button class="copy-ip-btn" onclick="copyIP()">
-      📋 Copy IP — excitdev.org
-    </button>
-
-    <div class="subdomain-strip" style="margin-top:2rem; border-radius:8px">
-      <a href="https://map.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">🗺</span> FluffyMap</a>
-      <a href="https://stats.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">📊</span> Stats</a>
+    <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;padding-bottom:2rem">
+      <a href="https://fluffymap.excitdev.org" target="_blank" class="subdomain-btn" style="border-radius:100px"><span class="icon">🗺</span> FluffyMap</a>
+      <a href="https://stats.excitdev.org" target="_blank" class="subdomain-btn" style="border-radius:100px"><span class="icon">📊</span> Stats</a>
+      <button class="subdomain-btn" style="border-radius:100px" onclick="showPage('discord')"><span class="icon">💬</span> Discord</button>
     </div>
   </div>
 
+  <!-- players + info -->
   <section>
     <div class="container">
       <div class="grid-2">
         <div>
-          <div class="section-tag">// Online Players</div>
-          <h2 class="section-title" style="font-size:1.5rem; margin-bottom:1.5rem">Who's online</h2>
-          <div class="player-list" id="player-list">
-            <div style="color:var(--text3); font-size:13px">Loading player list...</div>
+          <div class="section-tag">// Who's on</div>
+          <h2 class="section-title" style="font-size:1.4rem;margin-bottom:1.25rem">Online Players</h2>
+          <div style="background:var(--panel);border:1px solid var(--border2);border-radius:8px;padding:1.25rem;min-height:80px">
+            <div class="player-list" id="player-list">
+              <div style="color:var(--text3);font-size:13px">Loading...</div>
+            </div>
           </div>
+          <div style="font-size:11px;color:var(--text3);margin-top:0.5rem">Auto-refreshes every 30s · <span id="info-checked">—</span></div>
         </div>
         <div>
-          <div class="section-tag">// Server Info</div>
-          <h2 class="section-title" style="font-size:1.5rem; margin-bottom:1.5rem">Specs</h2>
-          <div style="display:flex;flex-direction:column;gap:0.75rem">
-            <div class="ctrl-item" style="border-radius:6px">
-              <div class="ctrl-item-label">Version</div>
-              <div class="ctrl-item-value" id="info-version">Loading...</div>
+          <div class="section-tag">// Connection</div>
+          <h2 class="section-title" style="font-size:1.4rem;margin-bottom:1.25rem">Quick Stats</h2>
+          <div style="display:flex;flex-direction:column;gap:0.5rem">
+            <div style="display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--border2);border-radius:6px;padding:0.85rem 1rem">
+              <span style="font-size:12px;color:var(--text3)">Players Online</span>
+              <span style="font-family:var(--font-display);font-size:13px;font-weight:700" id="info-players">—</span>
             </div>
-            <div class="ctrl-item" style="border-radius:6px">
-              <div class="ctrl-item-label">Players</div>
-              <div class="ctrl-item-value" id="info-players">Loading...</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--border2);border-radius:6px;padding:0.85rem 1rem">
+              <span style="font-size:12px;color:var(--text3)">Java IP</span>
+              <span style="font-size:11px;color:var(--orange);font-family:var(--font-mono)">written-path.gl.joinmc.link</span>
             </div>
-            <div class="ctrl-item" style="border-radius:6px">
-              <div class="ctrl-item-label">Last checked</div>
-              <div class="ctrl-item-value" id="info-checked" style="font-size:13px">—</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--border2);border-radius:6px;padding:0.85rem 1rem">
+              <span style="font-size:12px;color:var(--text3)">Bedrock Port</span>
+              <span style="font-size:13px;color:var(--orange2);font-family:var(--font-display);font-weight:700">21702</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--border2);border-radius:6px;padding:0.85rem 1rem">
+              <span style="font-size:12px;color:var(--text3)">Version</span>
+              <span style="font-size:13px;font-family:var(--font-display);font-weight:700">1.21.1+</span>
             </div>
           </div>
         </div>
@@ -620,16 +644,16 @@
   </section>
 
   <section style="padding-top:0">
-    <div class="container" style="max-width:700px">
+    <div class="container" style="max-width:680px">
       <div class="section-tag">// Rules</div>
       <h2 class="section-title" style="margin-bottom:1.5rem">Server Rules</h2>
       <ul class="rules-list">
-        <li><span class="rule-num">#1</span><span class="rule-text">No griefing, stealing, or destroying other players' builds or property.</span></li>
-        <li><span class="rule-num">#2</span><span class="rule-text">No hacking, cheating, or using unauthorized mods that give unfair advantages.</span></li>
-        <li><span class="rule-num">#3</span><span class="rule-text">Be respectful in chat. No harassment, hate speech, or excessive profanity.</span></li>
-        <li><span class="rule-num">#4</span><span class="rule-text">No spamming, advertising other servers, or posting inappropriate content.</span></li>
-        <li><span class="rule-num">#5</span><span class="rule-text">No exploiting bugs or glitches. Report them to staff immediately.</span></li>
-        <li><span class="rule-num">#6</span><span class="rule-text">Listen to staff. Their decisions are final. Disputes go through the help desk.</span></li>
+        <li><span class="rule-num">#1</span><span class="rule-text">No griefing, stealing from, or destroying other players' builds.</span></li>
+        <li><span class="rule-num">#2</span><span class="rule-text">No hacking, X-ray, or cheats. Performance mods like Sodium/Optifine are fine.</span></li>
+        <li><span class="rule-num">#3</span><span class="rule-text">Be respectful. No harassment, hate speech, or excessive profanity in chat.</span></li>
+        <li><span class="rule-num">#4</span><span class="rule-text">No spam or advertising other servers.</span></li>
+        <li><span class="rule-num">#5</span><span class="rule-text">Report bugs to staff rather than exploiting them.</span></li>
+        <li><span class="rule-num">#6</span><span class="rule-text">Staff have final say. If you disagree, open a help ticket instead of arguing in chat.</span></li>
       </ul>
     </div>
   </section>
@@ -639,6 +663,7 @@
     <div class="footer-links">
       <a class="footer-link" onclick="showPage('home')">Home</a>
       <a class="footer-link" onclick="showPage('server')">Server</a>
+      <a class="footer-link" onclick="showPage('discord')">Discord</a>
       <a class="footer-link" onclick="showPage('help')">Help</a>
     </div>
     <div class="footer-copy">© 2025 ExcitDev. Not affiliated with Mojang or Microsoft.</div>
@@ -647,85 +672,118 @@
 
 <!-- ===== HELP PAGE ===== -->
 <div class="page" id="page-help">
-  <section style="padding-bottom:2rem">
-    <div class="container">
-      <div class="section-tag">// Help Center</div>
-      <h1 class="section-title">How can we help?</h1>
-      <p class="section-sub">Documentation, FAQ, and support resources for ExcitDev players.</p>
 
-      <div class="doc-cards" style="margin-bottom:3rem">
-        <div class="doc-card">
+  <!-- hero banner -->
+  <div style="background:var(--void2);border-bottom:1px solid var(--border2);padding:3rem 2rem;text-align:center">
+    <div class="section-tag">// Help Center</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(1.8rem,5vw,2.8rem);font-weight:900;letter-spacing:-1px;margin-bottom:0.75rem">How can we help?</h1>
+    <p style="color:var(--text2);font-size:14px;max-width:480px;margin:0 auto">FAQs and support for ExcitDev players. Can't find your answer? Open a ticket below.</p>
+  </div>
+
+  <section>
+    <div class="container">
+
+      <!-- doc cards — cleaner grid -->
+      <div class="section-tag" style="margin-bottom:1rem">// Quick Links</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:3.5rem">
+
+        <div class="doc-card" style="border-left:3px solid var(--orange)">
           <div class="doc-card-icon">🚀</div>
           <div class="doc-card-title">Getting Started</div>
-          <div class="doc-card-desc">How to connect, choose your game mode, and get your first base set up.</div>
+          <div class="doc-card-desc">How to connect on Java or Bedrock and survive your first night.</div>
         </div>
-        <div class="doc-card">
-          <div class="doc-card-icon">🏠</div>
-          <div class="doc-card-title">Land Claiming</div>
-          <div class="doc-card-desc">Protect your builds with our land claiming system. Step-by-step guide.</div>
-        </div>
-        <div class="doc-card">
-          <div class="doc-card-icon">💰</div>
-          <div class="doc-card-title">Economy Guide</div>
-          <div class="doc-card-desc">Trading, the player market, and how to earn and spend in-game currency.</div>
-        </div>
-        <div class="doc-card">
+
+        <div class="doc-card" style="border-left:3px solid var(--orange)">
           <div class="doc-card-icon">🛡</div>
           <div class="doc-card-title">Ranks & Perks</div>
-          <div class="doc-card-desc">Free and donor ranks explained. What each rank unlocks and how to earn them.</div>
+          <div class="doc-card-desc">What each rank unlocks. Spoiler: it's all cosmetic, no pay-to-win.</div>
         </div>
-        <div class="doc-card">
+
+        <div class="doc-card" style="border-left:3px solid var(--orange)">
           <div class="doc-card-icon">⚠️</div>
           <div class="doc-card-title">Ban Appeals</div>
-          <div class="doc-card-desc">Think you were wrongly banned? Submit an appeal using our contact form.</div>
+          <div class="doc-card-desc">Think the ban was a mistake? Fill in the ticket form at the bottom.</div>
         </div>
-        <div class="doc-card">
+
+        <div class="doc-card" style="border-left:3px solid var(--orange)">
           <div class="doc-card-icon">📋</div>
           <div class="doc-card-title">Staff Applications</div>
-          <div class="doc-card-desc">Want to join the team? Read the requirements and apply through our form.</div>
+          <div class="doc-card-desc">Want to help run the server? Submit an application via the ticket form.</div>
+        </div>
+
+        <div class="doc-card" style="border-left:3px solid var(--orange)">
+          <div class="doc-card-icon">🐛</div>
+          <div class="doc-card-title">Bug Reports</div>
+          <div class="doc-card-desc">Found something broken? Please report it instead of abusing it.</div>
+        </div>
+
+        <div class="doc-card" style="border-left:3px solid var(--orange)">
+          <div class="doc-card-icon">💬</div>
+          <div class="doc-card-title">Discord</div>
+          <div class="doc-card-desc">Fastest way to reach staff. Join via the Discord page and ping a mod.</div>
         </div>
       </div>
 
-      <div class="section-tag">// FAQ</div>
-      <h2 class="section-title" style="font-size:1.75rem; margin-bottom:1.5rem">Frequently Asked Questions</h2>
-      <div id="faq" style="max-width:700px">
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">What version does the server run? <span class="arrow">▼</span></button>
-          <div class="faq-a">The server runs the latest stable Java Edition release. We update within a few weeks of each major Minecraft version to ensure plugin compatibility.</div>
+      <!-- FAQ -->
+      <div class="section-tag" style="margin-bottom:0.75rem">// FAQ</div>
+      <h2 style="font-family:var(--font-display);font-size:1.6rem;font-weight:900;letter-spacing:-0.5px;margin-bottom:1.5rem">Frequently Asked Questions</h2>
+
+      <div style="max-width:680px;background:var(--panel);border:1px solid var(--border2);border-radius:10px;overflow:hidden">
+
+        <div class="faq-item" style="border-bottom:1px solid var(--border2)">
+          <button class="faq-q" style="padding:1.1rem 1.25rem" onclick="toggleFaq(this)">What version does the server run? <span class="arrow">▼</span></button>
+          <div class="faq-a" style="padding-left:1.25rem;padding-right:1.25rem">The server runs <strong>1.21.1+</strong>. Both Java and Bedrock players can join — see the Server page for the right IP for your edition.</div>
         </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Is the server free to play? <span class="arrow">▼</span></button>
-          <div class="faq-a">Yes, ExcitDev is completely free to join. We offer optional donor ranks that support server costs and provide cosmetic perks — no pay-to-win mechanics.</div>
+
+        <div class="faq-item" style="border-bottom:1px solid var(--border2)">
+          <button class="faq-q" style="padding:1.1rem 1.25rem" onclick="toggleFaq(this)">Is the server free to play? <span class="arrow">▼</span></button>
+          <div class="faq-a" style="padding-left:1.25rem;padding-right:1.25rem">Yes, completely free. Just grab Minecraft, use the IPs on the Server page, and you're in.</div>
         </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">How do I claim land to protect my base? <span class="arrow">▼</span></button>
-          <div class="faq-a">Use a golden shovel to mark two corners of your claim area. You start with 500 claim blocks and earn more by playing. Type /claimslist to see your claims.</div>
+
+        <div class="faq-item" style="border-bottom:1px solid var(--border2)">
+          <button class="faq-q" style="padding:1.1rem 1.25rem" onclick="toggleFaq(this)">Is there land claiming? <span class="arrow">▼</span></button>
+          <div class="faq-a" style="padding-left:1.25rem;padding-right:1.25rem">Nope! There's no land claiming system on ExcitDev. Build where you like, but be cool — griefing other people's stuff is against the rules and can get you banned.</div>
         </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">The server shows offline — is it down? <span class="arrow">▼</span></button>
-          <div class="faq-a">If no Minecraft server is running at excitdev.org yet, it will show as offline. Check our Discord for announcements about launch dates and maintenance windows.</div>
+
+        <div class="faq-item" style="border-bottom:1px solid var(--border2)">
+          <button class="faq-q" style="padding:1.1rem 1.25rem" onclick="toggleFaq(this)">The server shows offline or "server not found" — what do I do? <span class="arrow">▼</span></button>
+          <div class="faq-a" style="padding-left:1.25rem;padding-right:1.25rem">First, check the homepage — it shows live status. If it's showing offline there too, double-check you've typed the IP correctly from the Server page. If you're still having trouble, open a ticket below or ask in Discord and someone will help you out.</div>
         </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">How do I apply to become a staff member? <span class="arrow">▼</span></button>
-          <div class="faq-a">Use the contact form below and select "Staff Application" as the topic. Include your age, time zone, past moderation experience, and how many hours a week you can commit.</div>
+
+        <div class="faq-item" style="border-bottom:1px solid var(--border2)">
+          <button class="faq-q" style="padding:1.1rem 1.25rem" onclick="toggleFaq(this)">I have a question that isn't answered here — what do I do? <span class="arrow">▼</span></button>
+          <div class="faq-a" style="padding-left:1.25rem;padding-right:1.25rem">Honestly? Just ask lmao. Open a ticket at the bottom of this page or hop in Discord and someone will sort you out.</div>
         </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Where can I see the live world map? <span class="arrow">▼</span></button>
-          <div class="faq-a">Visit map.excitdev.org to see FluffyMap — a live, interactive overhead map of the entire server world. You can see player locations, claimed land, and biomes.</div>
+
+        <div class="faq-item" style="border-bottom:1px solid var(--border2)">
+          <button class="faq-q" style="padding:1.1rem 1.25rem" onclick="toggleFaq(this)">Is there a YouTube channel for the server? <span class="arrow">▼</span></button>
+          <div class="faq-a" style="padding-left:1.25rem;padding-right:1.25rem">The server is linked to <a href="https://www.youtube.com/@Hay1335_" target="_blank" style="color:var(--orange)">@Hay1335_</a> on YouTube. We don't have a dedicated server YT channel right now — but if you're coming from Crystalline, welcome! The Discord linked to the YT server is a great place to start.</div>
         </div>
+
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Can I use mods or texture packs? <span class="arrow">▼</span></button>
-          <div class="faq-a">Optifine, Sodium, and approved performance mods are fine. X-ray, auto-clickers, and any mods that provide unfair game advantages are strictly banned.</div>
+          <button class="faq-q" style="padding:1.1rem 1.25rem" onclick="toggleFaq(this)">Can I use mods or texture packs? <span class="arrow">▼</span></button>
+          <div class="faq-a" style="padding-left:1.25rem;padding-right:1.25rem">Sure, mods and texture packs are fine — knock yourself out. <strong style="color:var(--red)">No X-ray and no cheats though.</strong> Performance mods like Sodium, Optifine, Iris are totally fine.</div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <section style="background:var(--void2); border-top:1px solid var(--border2); padding-top:4rem">
-    <div class="container" style="max-width:700px">
+  <!-- ticket section -->
+  <section style="background:var(--void2);border-top:1px solid var(--border2)">
+    <div class="container" style="max-width:680px">
       <div class="section-tag">// Support</div>
-      <h2 class="section-title" style="margin-bottom:0.5rem">Still need help?</h2>
-      <p class="section-sub">Send us a message and we'll get back to you within 24 hours.</p>
+      <h2 style="font-family:var(--font-display);font-size:1.6rem;font-weight:900;letter-spacing:-0.5px;margin-bottom:0.5rem">Open a Ticket</h2>
+      <p style="color:var(--text2);font-size:13px;margin-bottom:0.75rem">Fill this in and we'll get back to you. Tickets are read by staff — this is the right place for ban appeals, bug reports, and staff applications.</p>
+
+      <!-- how tickets work note -->
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:0.9rem 1.1rem;margin-bottom:1.75rem;display:flex;gap:0.75rem;align-items:flex-start">
+        <span style="font-size:16px;margin-top:1px">ℹ️</span>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6">
+          <strong style="color:var(--text)">How tickets work:</strong> Your message gets saved and a staff member will follow up via Discord DM or email — whichever you provide. For faster help, join our <button onclick="showPage('discord')" style="background:none;border:none;color:var(--orange);cursor:pointer;font-family:var(--font-mono);font-size:12px;padding:0">Discord servers</button> and ping a mod directly.
+        </div>
+      </div>
+
       <div id="help-form">
         <div class="grid-2">
           <div class="form-group">
@@ -733,14 +791,14 @@
             <input class="form-input" type="text" placeholder="YourUsername" id="hf-name">
           </div>
           <div class="form-group">
-            <label class="form-label">Email</label>
-            <input class="form-input" type="email" placeholder="your@email.com" id="hf-email">
+            <label class="form-label">Email or Discord tag</label>
+            <input class="form-input" type="text" placeholder="you@email.com or user#0000" id="hf-email">
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">Issue Type</label>
+          <label class="form-label">Ticket Type</label>
           <select class="form-select" id="hf-topic">
-            <option value="">Select a topic...</option>
+            <option value="">Select a type...</option>
             <option>Bug Report</option>
             <option>Ban Appeal</option>
             <option>Staff Application</option>
@@ -750,12 +808,12 @@
         </div>
         <div class="form-group">
           <label class="form-label">Message</label>
-          <textarea class="form-textarea" placeholder="Describe your issue in as much detail as possible..." id="hf-message"></textarea>
+          <textarea class="form-textarea" placeholder="Describe your issue in as much detail as possible. For ban appeals include your username and what happened. For staff apps include your age, timezone, and availability." id="hf-message" style="min-height:130px"></textarea>
         </div>
         <button class="form-submit" onclick="submitHelp()">Submit Ticket →</button>
       </div>
       <div class="form-success" id="help-success">
-        ✓ Ticket submitted! We'll get back to you within 24 hours.
+        ✓ Ticket submitted! We'll follow up within 24 hours via Discord or email.
       </div>
     </div>
   </section>
@@ -765,6 +823,100 @@
     <div class="footer-links">
       <a class="footer-link" onclick="showPage('home')">Home</a>
       <a class="footer-link" onclick="showPage('server')">Server</a>
+      <a class="footer-link" onclick="showPage('discord')">Discord</a>
+      <a class="footer-link" onclick="showPage('help')">Help</a>
+    </div>
+    <div class="footer-copy">© 2025 ExcitDev. Not affiliated with Mojang or Microsoft.</div>
+  </footer>
+</div>
+
+<!-- ===== DISCORD PAGE ===== -->
+<div class="page" id="page-discord">
+
+  <div style="background:var(--void2);border-bottom:1px solid var(--border2);padding:3rem 2rem;text-align:center">
+    <div class="section-tag">// Community</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(1.8rem,5vw,2.8rem);font-weight:900;letter-spacing:-1px;margin-bottom:0.75rem">Discord Servers</h1>
+    <p style="color:var(--text2);font-size:14px;max-width:460px;margin:0 auto">Pick the right server for you. Some are public, one requires a secret word.</p>
+  </div>
+
+  <section style="padding-bottom:1rem">
+    <div class="container" style="max-width:720px">
+
+      <!-- PUBLIC SERVERS -->
+      <div class="section-tag" style="margin-bottom:1rem">// Public Servers</div>
+      <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:3rem">
+
+        <!-- MC / YT server -->
+        <div style="background:var(--panel);border:1px solid var(--border2);border-radius:10px;padding:1.5rem;display:flex;align-items:flex-start;gap:1.25rem;transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--border)'" onmouseout="this.style.borderColor='var(--border2)'">
+          <div style="width:48px;height:48px;border-radius:10px;background:var(--panel2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🎮</div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:0.35rem">
+              <span style="font-family:var(--font-display);font-size:14px;font-weight:700">Hay1335</span>
+              <a href="https://www.youtube.com/@Hay1335_" target="_blank" style="font-size:11px;background:rgba(255,0,0,0.15);color:#ff4444;border:1px solid rgba(255,0,0,0.2);padding:2px 8px;border-radius:100px;text-decoration:none;letter-spacing:0.5px">▶ YouTube</a>
+            </div>
+            <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.6">The main Minecraft server Discord, linked to the YouTube channel. Catch updates, events, and community chat here.</p>
+            <a href="https://discord.gg/6RFk57rQgq" target="_blank" class="btn-primary" style="font-size:12px;padding:8px 18px">Join Server →</a>
+          </div>
+        </div>
+
+        <!-- The Center -->
+        <div style="background:var(--panel);border:1px solid var(--border2);border-radius:10px;padding:1.5rem;display:flex;align-items:flex-start;gap:1.25rem;transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--border)'" onmouseout="this.style.borderColor='var(--border2)'">
+          <div style="width:48px;height:48px;border-radius:10px;background:var(--panel2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🏢</div>
+          <div style="flex:1">
+            <div style="font-family:var(--font-display);font-size:14px;font-weight:700;margin-bottom:0.35rem">The Center</div>
+            <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.6">The Center is a server designed to build a safe place for furries and antifurries to debate and hangout. Here at TC we leave differences at the door in order to create a healthy space to chill and hangout regardless of background.</p>
+            <a href="https://discord.gg/HmBYaDbHJS" target="_blank" class="btn-primary" style="font-size:12px;padding:8px 18px">Join Server →</a>
+          </div>
+        </div>
+
+        <!-- Pablo's server -->
+        <div style="background:var(--panel);border:1px solid var(--border2);border-radius:10px;padding:1.5rem;display:flex;align-items:flex-start;gap:1.25rem;opacity:0.65;transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--border)'" onmouseout="this.style.borderColor='var(--border2)'">
+          <div style="width:48px;height:48px;border-radius:10px;background:var(--panel2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🐱</div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.35rem;flex-wrap:wrap">
+              <span style="font-family:var(--font-display);font-size:14px;font-weight:700">Pablo's Server</span>
+              <span style="font-size:11px;color:var(--text3);border:1px solid var(--border2);padding:2px 8px;border-radius:100px;letter-spacing:0.5px">Inactive</span>
+            </div>
+            <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.6">A server dedicated to Pablo, a very good cat. Quiet these days but the door's still open.</p>
+            <a href="https://discord.gg/5FQ9UwPRrJ" target="_blank" class="btn-secondary" style="font-size:12px;padding:8px 18px">Visit →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOX-GATED MAIN -->
+      <div class="section-tag" style="margin-bottom:0.75rem">// Members Only</div>
+      <div style="margin-bottom:0.75rem">
+        <span style="font-family:'Fredoka One',cursive;font-size:2rem;color:var(--orange);letter-spacing:1px">The Fluffy Goobers 🦊</span>
+      </div>
+      <p style="color:var(--text2);font-size:13px;margin-bottom:1.5rem;max-width:500px;line-height:1.6">A Hangout Server For Furries, Or Anyone! This one's a little more personal — enter the secret word to unlock the invite.</p>
+
+      <div class="card" id="fox-gate-card" style="border-radius:10px;max-width:480px">
+        <div style="font-size:28px;margin-bottom:0.75rem">🔒</div>
+        <div class="card-title" style="margin-bottom:0.4rem">Secret word required</div>
+        <div class="card-text" style="margin-bottom:1.25rem;font-size:13px">Type the secret word to reveal the invite link.</div>
+        <div style="display:flex;gap:0.75rem">
+          <input class="form-input" type="text" id="fox-input" placeholder="Secret word..." style="max-width:180px" onkeydown="if(event.key==='Enter')checkFox()">
+          <button class="btn-primary" style="padding:10px 20px;font-size:12px" onclick="checkFox()">Unlock 🔓</button>
+        </div>
+        <div id="fox-error" style="font-size:12px;color:var(--red);margin-top:0.75rem;display:none">🚫 Wrong word. Try again.</div>
+      </div>
+
+      <div class="card" id="fox-unlocked" style="display:none;border-radius:10px;max-width:480px;border-color:rgba(68,255,136,0.3)">
+        <div style="font-size:28px;margin-bottom:0.75rem">🔓</div>
+        <div style="font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--green);margin-bottom:0.4rem">You're in!</div>
+        <div class="card-text" style="margin-bottom:1.25rem;font-size:13px">Welcome, goober. Here's your invite.</div>
+        <a href="https://discord.gg/RrCE7MhjMU" target="_blank" class="btn-primary" style="font-size:12px;padding:8px 18px">Join The Fluffy Goobers →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">EXCITDEV</div>
+    <div class="footer-links">
+      <a class="footer-link" onclick="showPage('home')">Home</a>
+      <a class="footer-link" onclick="showPage('server')">Server</a>
+      <a class="footer-link" onclick="showPage('discord')">Discord</a>
       <a class="footer-link" onclick="showPage('help')">Help</a>
     </div>
     <div class="footer-copy">© 2025 ExcitDev. Not affiliated with Mojang or Microsoft.</div>
@@ -780,7 +932,8 @@ function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
-  document.getElementById('nav-' + name).classList.add('active');
+  const navEl = document.getElementById('nav-' + name);
+  if (navEl) navEl.classList.add('active');
   window.scrollTo(0, 0);
 }
 
@@ -792,9 +945,25 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-// COPY IP
-function copyIP() {
-  navigator.clipboard.writeText('excitdev.org').then(() => showToast('✓ IP copied: excitdev.org'));
+// COPY IPs
+function copyJavaIP() {
+  navigator.clipboard.writeText('written-path.gl.joinmc.link').then(() => showToast('✓ Java IP copied!'));
+}
+function copyBedrockIP() {
+  navigator.clipboard.writeText('addition-commissions.gl.at.ply.gg').then(() => showToast('✓ Bedrock IP copied! Port: 21702'));
+}
+
+// FOX GATE
+function checkFox() {
+  const val = document.getElementById('fox-input').value.trim().toLowerCase().replace(/['']/g, "'");
+  const err = document.getElementById('fox-error');
+  if (val === "fox'" || val === 'fox' || val === "fox'") {
+    document.getElementById('fox-gate-card').style.display = 'none';
+    document.getElementById('fox-unlocked').style.display = 'block';
+  } else {
+    err.style.display = 'block';
+    setTimeout(() => err.style.display = 'none', 2000);
+  }
 }
 
 // FAQ ACCORDION
@@ -829,46 +998,38 @@ function submitHelp() {
   document.getElementById('help-success').style.display = 'block';
 }
 
-// SERVER STATUS (live via mcsrvstat.us API)
+// SERVER STATUS
 async function fetchStatus() {
   try {
-    const res = await fetch('https://api.mcsrvstat.us/3/excitdev.org');
+    const res = await fetch('https://api.mcsrvstat.us/3/written-path.gl.joinmc.link');
     const data = await res.json();
     const online = data.online === true;
     const players = data.players ? data.players.online : 0;
     const max = data.players ? data.players.max : 0;
-    const version = data.version || 'Unknown';
     const motd = data.motd && data.motd.clean ? data.motd.clean[0] : '';
     const playerNames = data.players && data.players.list ? data.players.list.map(p => p.name || p) : [];
 
-    // Hero status
     const dot = document.getElementById('hero-status-dot');
     dot.className = 'status-dot ' + (online ? 'online' : 'offline');
     document.getElementById('hero-status-text').textContent = online ? 'Online' : 'Offline';
-    document.getElementById('hero-players').textContent = online ? players + ' / ' + max + ' players online' : 'Server is offline';
+    document.getElementById('hero-players').textContent = online ? players + ' / ' + max + ' players online' : 'Server is currently offline';
 
-    // Server page
     const sdot = document.getElementById('server-dot');
     sdot.style.background = online ? 'var(--green)' : 'var(--red)';
     if (online) sdot.style.boxShadow = '0 0 8px var(--green)';
     document.getElementById('server-status-text').textContent = online ? 'Online' : 'Offline';
-    document.getElementById('server-motd').textContent = motd;
-    document.getElementById('info-version').textContent = version;
+    if (document.getElementById('server-motd')) document.getElementById('server-motd').textContent = motd;
     document.getElementById('info-players').textContent = players + ' / ' + max;
     document.getElementById('info-checked').textContent = new Date().toLocaleTimeString();
 
-    // Player list
     const pl = document.getElementById('player-list');
     if (playerNames.length > 0) {
       pl.innerHTML = playerNames.map(n => `<div class="player-tag"><div class="player-dot"></div>${n}</div>`).join('');
     } else {
-      pl.innerHTML = online ? '<div style="color:var(--text3);font-size:13px">No players listed (API may not expose names)</div>'
+      pl.innerHTML = online ? '<div style="color:var(--text3);font-size:13px">No player names exposed by API</div>'
                            : '<div style="color:var(--text3);font-size:13px">Server offline</div>';
     }
 
-    // Control room
-    document.getElementById('ctrl-version').textContent = version;
-    document.getElementById('ctrl-version-sub').textContent = online ? 'Java Edition' : 'Offline';
     document.getElementById('ctrl-players').textContent = online ? players + '/' + max : '—';
     document.getElementById('ctrl-players-sub').textContent = online ? 'players online now' : 'Server offline';
 
