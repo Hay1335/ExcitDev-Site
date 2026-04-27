@@ -398,154 +398,148 @@
   <div class="nav-logo" onclick="showPage('home')">EXCIT<span>DEV</span></div>
   <div class="nav-links">
     <button class="nav-link active" onclick="showPage('home')" id="nav-home">Home</button>
-    <button class="nav-link" onclick="showPage('server')" id="nav-server">Server</button>
+    <button class="nav-link" onclick="showPage('server')" id="nav-server">Servers</button>
     <button class="nav-link" onclick="showPage('discord')" id="nav-discord">Discord</button>
     <button class="nav-link" onclick="showPage('help')" id="nav-help">Help</button>
-    <button class="nav-btn" onclick="copyJavaIP()">Copy IP</button>
   </div>
 </nav>
 
 <!-- ===== HOME PAGE ===== -->
 <div class="page active" id="page-home">
 
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-grid"></div>
-    <div class="hero-tag">⛏ Minecraft Community</div>
+    <div class="hero-tag">⛏ Two Servers · Java & Bedrock · 1.21.1+</div>
     <h1 class="hero-title">
-      BUILD. EXPLORE.
+      BUILD. SURVIVE.
       <span class="accent">EXCITE.</span>
     </h1>
-    <p class="hero-sub">Join the ExcitDev Minecraft community. Survival, creative, and more — all on one server built by players, for players.</p>
+    <p class="hero-sub">Two chill Minecraft servers — one under ExcitDev, one under Hay1335_. Both Java + Bedrock. No pay-to-win, no land claiming drama, just vibes.</p>
     <div class="hero-actions">
-      <button class="btn-primary" onclick="copyJavaIP()">☕ Java — written-path.gl.joinmc.link</button>
-      <button class="btn-secondary" onclick="copyBedrockIP()">📱 Bedrock — Copy IP</button>
+      <button class="btn-primary" onclick="showPage('server')">⚡ View Servers</button>
+      <button class="btn-secondary" onclick="showPage('discord')">💬 Discord</button>
     </div>
+  </section>
 
-    <div class="status-card">
-      <div class="status-dot" id="hero-status-dot"></div>
-      <div class="status-info">
-        <div class="status-label">Server Status</div>
-        <div class="status-value" id="hero-status-text">Checking...</div>
-        <div style="font-size:12px; color: var(--text3); margin-top:2px" id="hero-players"></div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <div class="status-ip" onclick="copyJavaIP()" title="Java IP">☕ Java</div>
-        <div class="status-ip" onclick="copyBedrockIP()" title="Bedrock IP">📱 Bedrock</div>
+  <!-- TWO SERVER CARDS -->
+  <section style="background:var(--void2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:4rem 2rem">
+    <div class="container" style="max-width:960px">
+      <div class="section-tag">// Our servers</div>
+      <h2 class="section-title" style="margin-bottom:2rem">Pick a server</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem">
+
+        <!-- ExcitDev server -->
+        <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:2rem;position:relative;overflow:hidden">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--orange2))"></div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem">
+            <div style="width:42px;height:42px;border-radius:8px;background:var(--orange-glow);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px">🏕</div>
+            <div>
+              <div style="font-family:var(--font-display);font-size:14px;font-weight:900">ExcitDev</div>
+              <div style="font-size:11px;color:var(--text3)">Survival · FluffyMap · Stats</div>
+            </div>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:5px">
+              <div style="width:7px;height:7px;border-radius:50%;background:var(--text3)" id="home-dot-excit"></div>
+              <span style="font-size:11px;color:var(--text3)" id="home-status-excit">—</span>
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--text2);margin-bottom:1.5rem;line-height:1.7">Vanilla-ish survival with a live world map (FluffyMap) and a stats dashboard. Open to Java and Bedrock players.</p>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem">
+            <div style="background:var(--panel2);border:1px solid var(--border2);border-radius:6px;padding:0.6rem 1rem;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:11px;color:var(--text3)">☕ Java</span>
+              <span style="font-size:11px;font-family:var(--font-mono);color:var(--orange)">written-path.gl.joinmc.link</span>
+            </div>
+            <div style="background:var(--panel2);border:1px solid var(--border2);border-radius:6px;padding:0.6rem 1rem;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:11px;color:var(--text3)">📱 Bedrock</span>
+              <span style="font-size:11px;font-family:var(--font-mono);color:var(--orange2)">...gl.at.ply.gg · :21702</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:0.75rem">
+            <button onclick="copyExcitJava()" class="btn-primary" style="flex:1;font-size:11px;padding:9px">Copy Java IP</button>
+            <button onclick="showPage('server')" class="btn-secondary" style="flex:1;font-size:11px;padding:9px">Full Info →</button>
+          </div>
+        </div>
+
+        <!-- Hay1335 server -->
+        <div style="background:var(--panel);border:1px solid var(--border2);border-radius:14px;padding:2rem;position:relative;overflow:hidden">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7c6fff,#a78bfa)"></div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem">
+            <div style="width:42px;height:42px;border-radius:8px;background:rgba(124,111,255,0.1);border:1px solid rgba(124,111,255,0.2);display:flex;align-items:center;justify-content:center;font-size:20px">🎮</div>
+            <div>
+              <div style="font-family:var(--font-display);font-size:14px;font-weight:900">Hay1335_</div>
+              <div style="font-size:11px;color:var(--text3)">Survival · YouTube server</div>
+            </div>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:5px">
+              <div style="width:7px;height:7px;border-radius:50%;background:var(--text3)" id="home-dot-hay"></div>
+              <span style="font-size:11px;color:var(--text3)" id="home-status-hay">—</span>
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--text2);margin-bottom:1.5rem;line-height:1.7">The server linked to <a href="https://www.youtube.com/@Hay1335_" target="_blank" style="color:#a78bfa;text-decoration:none">@Hay1335_</a> on YouTube. Survival, Java + Bedrock. No map yet but it's on the list.</p>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem">
+            <div style="background:var(--panel2);border:1px solid var(--border2);border-radius:6px;padding:0.6rem 1rem;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:11px;color:var(--text3)">☕ Java</span>
+              <span style="font-size:11px;font-family:var(--font-mono);color:#a78bfa">america-wines.gl.joinmc.link</span>
+            </div>
+            <div style="background:var(--panel2);border:1px solid var(--border2);border-radius:6px;padding:0.6rem 1rem;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:11px;color:var(--text3)">📱 Bedrock</span>
+              <span style="font-size:11px;font-family:var(--font-mono);color:#a78bfa">...gl.at.ply.gg · :6169</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:0.75rem">
+            <button onclick="copyHayJava()" style="flex:1;font-size:11px;padding:9px;background:rgba(124,111,255,0.2);border:1px solid rgba(124,111,255,0.3);color:#a78bfa;border-radius:4px;cursor:pointer;font-family:var(--font-mono);font-weight:700;transition:all 0.2s" onmouseover="this.style.background='rgba(124,111,255,0.3)'" onmouseout="this.style.background='rgba(124,111,255,0.2)'">Copy Java IP</button>
+            <button onclick="showPage('server')" class="btn-secondary" style="flex:1;font-size:11px;padding:9px">Full Info →</button>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
+  <!-- QUICK LINKS STRIP -->
   <div class="subdomain-strip">
     <a href="https://fluffymap.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">🗺</span> FluffyMap</a>
     <a href="https://stats.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">📊</span> Stats</a>
     <button class="subdomain-btn" onclick="showPage('discord')"><span class="icon">💬</span> Discord</button>
-    <a href="https://shop.excitdev.org" target="_blank" class="subdomain-btn"><span class="icon">🛒</span> Shop</a>
+    <a href="https://www.youtube.com/@Hay1335_" target="_blank" class="subdomain-btn"><span class="icon">▶</span> YouTube</a>
   </div>
 
+  <!-- FEATURES -->
   <section>
     <div class="container">
-      <div class="section-tag">// What we offer</div>
-      <h2 class="section-title">A world worth<br>logging into</h2>
-      <p class="section-sub">Carefully crafted game modes, active staff, and a community that actually cares.</p>
+      <div class="section-tag">// What you get</div>
+      <h2 class="section-title">Servers worth<br>logging into</h2>
+      <p class="section-sub">Both servers share the same philosophy: chill survival, no BS, open to everyone on Java and Bedrock.</p>
       <div class="grid-3">
-        <div class="card">
-          <div class="card-icon">🏔</div>
-          <div class="card-title">Survival</div>
-          <div class="card-text">Classic survival with land claiming, shops, and a living economy. Your base, your rules.</div>
+        <div class="card" style="border-top:3px solid var(--orange)">
+          <div class="card-icon">🏕</div>
+          <div class="card-title">Vanilla Survival</div>
+          <div class="card-text">No land claiming, no economy plugin. Pure survival. Build wherever, explore everything, fight the ender dragon — it's all there.</div>
         </div>
-        <div class="card">
-          <div class="card-icon">🎨</div>
-          <div class="card-title">Creative</div>
-          <div class="card-text">Unlimited plots, WorldEdit access, and weekly build contests with real prizes.</div>
+        <div class="card" style="border-top:3px solid var(--orange)">
+          <div class="card-icon">🔗</div>
+          <div class="card-title">Java + Bedrock</div>
+          <div class="card-text">PC, console, mobile — all welcome. Both servers support crossplay so you can play with whoever, on whatever device.</div>
         </div>
-        <div class="card">
-          <div class="card-icon">⚔️</div>
-          <div class="card-title">Mini-Games</div>
-          <div class="card-text">Skyblock, BedWars, Spleef, and more. New games added by community vote.</div>
-        </div>
-        <div class="card">
+        <div class="card" style="border-top:3px solid var(--orange)">
           <div class="card-icon">🗺</div>
-          <div class="card-title">Live Map</div>
-          <div class="card-text">FluffyMap shows the entire world in real-time. Find your friends, discover new builds.</div>
+          <div class="card-title">FluffyMap</div>
+          <div class="card-text">ExcitDev has a live overhead world map. See builds, find friends, and explore the server world from your browser.</div>
         </div>
-        <div class="card">
+        <div class="card" style="border-top:3px solid var(--orange)">
           <div class="card-icon">📊</div>
-          <div class="card-title">Player Stats</div>
-          <div class="card-text">Track your playtime, kills, blocks mined, and leaderboard rank on our stats dashboard.</div>
+          <div class="card-title">Server Stats</div>
+          <div class="card-text">Both servers share a stats dashboard showing CPU, RAM, and server health. Transparency on how the hardware is doing.</div>
         </div>
-        <div class="card">
+        <div class="card" style="border-top:3px solid var(--orange)">
+          <div class="card-icon">💬</div>
+          <div class="card-title">Community</div>
+          <div class="card-text">Multiple Discord servers, an active YouTube channel, and a community that doesn't take itself too seriously.</div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--orange)">
           <div class="card-icon">🛡</div>
-          <div class="card-title">Active Staff</div>
-          <div class="card-text">24/7 moderation, fast ticket response, and zero tolerance for griefers and hackers.</div>
+          <div class="card-title">No Pay-to-Win</div>
+          <div class="card-text">Nothing meaningful is behind a paywall. Ranks are cosmetic only. You won't get outplayed because someone spent money.</div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="control-room">
-    <div class="container">
-      <div class="section-tag">// Quick stats</div>
-      <h2 class="section-title" style="margin-bottom:2rem">Control Room</h2>
-      <div class="ctrl-grid">
-        <div class="ctrl-item" onclick="copyJavaIP()">
-          <div class="ctrl-item-label">Java IP</div>
-          <div class="ctrl-item-value" style="color:var(--orange);font-size:11px">written-path.gl.joinmc.link</div>
-          <div class="ctrl-item-action">Click to copy</div>
-        </div>
-        <div class="ctrl-item" onclick="copyBedrockIP()">
-          <div class="ctrl-item-label">Bedrock IP + Port</div>
-          <div class="ctrl-item-value" style="color:var(--orange);font-size:11px">addition-commissions.gl.at.ply.gg</div>
-          <div class="ctrl-item-action">Port: 21702 — Click to copy</div>
-        </div>
-        <div class="ctrl-item">
-          <div class="ctrl-item-label">Players Online</div>
-          <div class="ctrl-item-value" id="ctrl-players">—</div>
-          <div class="ctrl-item-action" id="ctrl-players-sub">Loading...</div>
-        </div>
-        <div class="ctrl-item" onclick="showPage('help')">
-          <div class="ctrl-item-label">Need Help?</div>
-          <div class="ctrl-item-value">Help Desk</div>
-          <div class="ctrl-item-action">View docs & FAQ →</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container" style="max-width: 700px">
-      <div class="section-tag">// Contact us</div>
-      <h2 class="section-title">Get in touch</h2>
-      <p class="section-sub">Bug report, ban appeal, staff application, or just a question? We read everything.</p>
-      <div id="contact-form-home">
-        <div class="grid-2">
-          <div class="form-group">
-            <label class="form-label">Name</label>
-            <input class="form-input" type="text" placeholder="Your Minecraft username" id="cf-name">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Email</label>
-            <input class="form-input" type="email" placeholder="your@email.com" id="cf-email">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Topic</label>
-          <select class="form-select" id="cf-topic">
-            <option value="">Select a topic...</option>
-            <option>Bug Report</option>
-            <option>Ban Appeal</option>
-            <option>Staff Application</option>
-            <option>General Question</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Message</label>
-          <textarea class="form-textarea" placeholder="Describe your issue or question..." id="cf-message"></textarea>
-        </div>
-        <button class="form-submit" onclick="submitContact()">Send Message →</button>
-      </div>
-      <div class="form-success" id="contact-success">
-        ✓ Message received! We'll get back to you within 24 hours.
       </div>
     </div>
   </section>
@@ -559,102 +553,163 @@
     </div>
     <div class="footer-links">
       <a class="footer-link" onclick="showPage('home')">Home</a>
-      <a class="footer-link" onclick="showPage('server')">Server</a>
+      <a class="footer-link" onclick="showPage('server')">Servers</a>
       <a class="footer-link" onclick="showPage('discord')">Discord</a>
       <a class="footer-link" onclick="showPage('help')">Help</a>
     </div>
-    <div class="footer-copy">© 2025 ExcitDev. Not affiliated with Mojang or Microsoft.</div>
+    <div class="footer-copy">© 2025 ExcitDev · <a href="https://www.youtube.com/@Hay1335_" target="_blank" style="color:var(--text3);text-decoration:none">@Hay1335_ on YouTube</a> · Not affiliated with Mojang or Microsoft.</div>
   </footer>
 </div>
 
 <!-- ===== SERVER PAGE ===== -->
 <div class="page" id="page-server">
 
-  <!-- big status banner -->
-  <div style="background:var(--void2); border-bottom:1px solid var(--border2); padding:3rem 2rem 0; text-align:center">
-    <div class="section-tag">// Live Status</div>
-    <h1 style="font-family:var(--font-display);font-size:clamp(1.8rem,5vw,3rem);font-weight:900;letter-spacing:-1px;margin-bottom:1.5rem">ExcitDev Server</h1>
-
-    <!-- status pill -->
-    <div style="display:inline-flex;align-items:center;gap:0.75rem;background:var(--panel);border:1px solid var(--border);padding:0.75rem 1.5rem;border-radius:100px;margin-bottom:1.5rem">
-      <div class="big-status-dot" id="server-dot" style="width:10px;height:10px;border-radius:50%;background:var(--text3)"></div>
-      <span style="font-family:var(--font-display);font-size:13px;font-weight:700" id="server-status-text">Checking...</span>
-      <span style="color:var(--text3);font-size:12px" id="server-motd"></span>
-    </div>
-
-    <!-- two IP cards side by side -->
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem">
-      <div onclick="copyJavaIP()" style="background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.75rem;cursor:pointer;text-align:left;min-width:220px;transition:background 0.2s" onmouseover="this.style.background='var(--panel2)'" onmouseout="this.style.background='var(--panel)'">
-        <div style="font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:0.4rem">☕ Java Edition</div>
-        <div style="font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--orange);word-break:break-all">written-path.gl.joinmc.link</div>
-        <div style="font-size:11px;color:var(--text3);margin-top:0.4rem">Click to copy IP</div>
-      </div>
-      <div onclick="copyBedrockIP()" style="background:var(--panel);border:1px solid var(--border2);border-radius:10px;padding:1.25rem 1.75rem;cursor:pointer;text-align:left;min-width:220px;transition:background 0.2s" onmouseover="this.style.background='var(--panel2)'" onmouseout="this.style.background='var(--panel)'">
-        <div style="font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:0.4rem">📱 Bedrock Edition</div>
-        <div style="font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--orange2);word-break:break-all">addition-commissions.gl.at.ply.gg</div>
-        <div style="font-size:11px;color:var(--text3);margin-top:0.4rem">Port: 21702 — Click to copy</div>
-      </div>
-    </div>
-
-    <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;padding-bottom:2rem">
-      <a href="https://fluffymap.excitdev.org" target="_blank" class="subdomain-btn" style="border-radius:100px"><span class="icon">🗺</span> FluffyMap</a>
-      <a href="https://stats.excitdev.org" target="_blank" class="subdomain-btn" style="border-radius:100px"><span class="icon">📊</span> Stats</a>
-      <button class="subdomain-btn" style="border-radius:100px" onclick="showPage('discord')"><span class="icon">💬</span> Discord</button>
-    </div>
+  <div style="background:var(--void2);border-bottom:1px solid var(--border2);padding:3rem 2rem;text-align:center">
+    <div class="section-tag">// Our Servers</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(1.8rem,5vw,3rem);font-weight:900;letter-spacing:-1px;margin-bottom:0.75rem">Server Directory</h1>
+    <p style="color:var(--text2);font-size:13px;max-width:460px;margin:0 auto">Two servers, two vibes. Both Java + Bedrock. Same rules, same no-BS approach.</p>
   </div>
 
-  <!-- players + info -->
   <section>
-    <div class="container">
-      <div class="grid-2">
-        <div>
-          <div class="section-tag">// Who's on</div>
-          <h2 class="section-title" style="font-size:1.4rem;margin-bottom:1.25rem">Online Players</h2>
-          <div style="background:var(--panel);border:1px solid var(--border2);border-radius:8px;padding:1.25rem;min-height:80px">
-            <div class="player-list" id="player-list">
-              <div style="color:var(--text3);font-size:13px">Loading...</div>
-            </div>
+    <div class="container" style="max-width:1000px">
+
+      <!-- ExcitDev -->
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:2rem">
+        <div style="background:linear-gradient(90deg,rgba(255,107,0,0.15),transparent);border-bottom:1px solid var(--border);padding:1.5rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+          <div style="width:48px;height:48px;border-radius:10px;background:var(--orange-glow);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">🏕</div>
+          <div style="flex:1">
+            <div style="font-family:var(--font-display);font-size:18px;font-weight:900">ExcitDev</div>
+            <div style="font-size:12px;color:var(--text3)">Survival · FluffyMap · Stats · 1.21.1+</div>
           </div>
-          <div style="font-size:11px;color:var(--text3);margin-top:0.5rem">Auto-refreshes every 30s · <span id="info-checked">—</span></div>
+          <div style="display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--border2);padding:6px 14px;border-radius:100px">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--text3)" id="server-dot"></div>
+            <span style="font-size:12px;font-family:var(--font-display);font-weight:700" id="server-status-text">Checking...</span>
+            <span style="font-size:11px;color:var(--text3)" id="server-motd"></span>
+          </div>
         </div>
-        <div>
-          <div class="section-tag">// Connection</div>
-          <h2 class="section-title" style="font-size:1.4rem;margin-bottom:1.25rem">Quick Stats</h2>
-          <div style="display:flex;flex-direction:column;gap:0.5rem">
-            <div style="display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--border2);border-radius:6px;padding:0.85rem 1rem">
-              <span style="font-size:12px;color:var(--text3)">Players Online</span>
-              <span style="font-family:var(--font-display);font-size:13px;font-weight:700" id="info-players">—</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--border2);border-radius:6px;padding:0.85rem 1rem">
-              <span style="font-size:12px;color:var(--text3)">Java IP</span>
-              <span style="font-size:11px;color:var(--orange);font-family:var(--font-mono)">written-path.gl.joinmc.link</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--border2);border-radius:6px;padding:0.85rem 1rem">
-              <span style="font-size:12px;color:var(--text3)">Bedrock Port</span>
-              <span style="font-size:13px;color:var(--orange2);font-family:var(--font-display);font-weight:700">21702</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--border2);border-radius:6px;padding:0.85rem 1rem">
-              <span style="font-size:12px;color:var(--text3)">Version</span>
-              <span style="font-size:13px;font-family:var(--font-display);font-weight:700">1.21.1+</span>
+        <div style="padding:1.5rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem">
+          <div>
+            <div style="font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.75rem">Connection</div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem">
+              <div onclick="copyExcitJava()" style="background:var(--panel2);border:1px solid var(--border2);border-radius:8px;padding:0.85rem 1rem;cursor:pointer;transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--border)'" onmouseout="this.style.borderColor='var(--border2)'">
+                <div style="font-size:10px;color:var(--text3);margin-bottom:3px">☕ JAVA</div>
+                <div style="font-family:var(--font-mono);font-size:12px;color:var(--orange);word-break:break-all">written-path.gl.joinmc.link</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:3px">Click to copy</div>
+              </div>
+              <div onclick="copyExcitBedrock()" style="background:var(--panel2);border:1px solid var(--border2);border-radius:8px;padding:0.85rem 1rem;cursor:pointer;transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--border)'" onmouseout="this.style.borderColor='var(--border2)'">
+                <div style="font-size:10px;color:var(--text3);margin-bottom:3px">📱 BEDROCK</div>
+                <div style="font-family:var(--font-mono);font-size:12px;color:var(--orange2);word-break:break-all">addition-commissions.gl.at.ply.gg</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:3px">Port: <strong style="color:var(--orange2)">21702</strong> · Click to copy</div>
+              </div>
             </div>
           </div>
+          <div>
+            <div style="font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.75rem">Live Info</div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem">
+              <div style="display:flex;justify-content:space-between;background:var(--panel2);border:1px solid var(--border2);border-radius:6px;padding:0.75rem 1rem">
+                <span style="font-size:12px;color:var(--text3)">Players</span>
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:700" id="info-players">—</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;background:var(--panel2);border:1px solid var(--border2);border-radius:6px;padding:0.75rem 1rem">
+                <span style="font-size:12px;color:var(--text3)">Version</span>
+                <span style="font-size:12px;font-weight:700">1.21.1+</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;background:var(--panel2);border:1px solid var(--border2);border-radius:6px;padding:0.75rem 1rem">
+                <span style="font-size:12px;color:var(--text3)">Last checked</span>
+                <span style="font-size:11px;color:var(--text3)" id="info-checked">—</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.75rem">Features</div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem">
+              <a href="https://fluffymap.excitdev.org" target="_blank" style="display:flex;align-items:center;gap:10px;background:var(--panel2);border:1px solid var(--border2);border-radius:8px;padding:0.75rem 1rem;text-decoration:none;color:var(--text2);font-size:12px;transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--border)'" onmouseout="this.style.borderColor='var(--border2)'">🗺 FluffyMap — Live World Map <span style="margin-left:auto;color:var(--orange)">→</span></a>
+              <a href="https://stats.excitdev.org" target="_blank" style="display:flex;align-items:center;gap:10px;background:var(--panel2);border:1px solid var(--border2);border-radius:8px;padding:0.75rem 1rem;text-decoration:none;color:var(--text2);font-size:12px;transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--border)'" onmouseout="this.style.borderColor='var(--border2)'">📊 Stats Dashboard <span style="margin-left:auto;color:var(--orange)">→</span></a>
+            </div>
+          </div>
+        </div>
+        <div style="border-top:1px solid var(--border2);padding:1rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+          <span style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;white-space:nowrap">Online now:</span>
+          <div class="player-list" id="player-list" style="flex:1"><span style="color:var(--text3);font-size:12px">Loading...</span></div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section style="padding-top:0">
-    <div class="container" style="max-width:680px">
-      <div class="section-tag">// Rules</div>
-      <h2 class="section-title" style="margin-bottom:1.5rem">Server Rules</h2>
-      <ul class="rules-list">
-        <li><span class="rule-num">#1</span><span class="rule-text">No griefing, stealing from, or destroying other players' builds.</span></li>
-        <li><span class="rule-num">#2</span><span class="rule-text">No hacking, X-ray, or cheats. Performance mods like Sodium/Optifine are fine.</span></li>
-        <li><span class="rule-num">#3</span><span class="rule-text">Be respectful. No harassment, hate speech, or excessive profanity in chat.</span></li>
-        <li><span class="rule-num">#4</span><span class="rule-text">No spam or advertising other servers.</span></li>
-        <li><span class="rule-num">#5</span><span class="rule-text">Report bugs to staff rather than exploiting them.</span></li>
-        <li><span class="rule-num">#6</span><span class="rule-text">Staff have final say. If you disagree, open a help ticket instead of arguing in chat.</span></li>
-      </ul>
+      <!-- Hay1335_ -->
+      <div style="background:var(--panel);border:1px solid rgba(124,111,255,0.3);border-radius:14px;overflow:hidden;margin-bottom:2.5rem">
+        <div style="background:linear-gradient(90deg,rgba(124,111,255,0.1),transparent);border-bottom:1px solid rgba(124,111,255,0.15);padding:1.5rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+          <div style="width:48px;height:48px;border-radius:10px;background:rgba(124,111,255,0.12);border:1px solid rgba(124,111,255,0.25);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">🎮</div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap">
+              <span style="font-family:var(--font-display);font-size:18px;font-weight:900">Hay1335_</span>
+              <a href="https://www.youtube.com/@Hay1335_" target="_blank" style="font-size:11px;background:rgba(255,0,0,0.12);color:#ff6666;border:1px solid rgba(255,0,0,0.2);padding:2px 10px;border-radius:100px;text-decoration:none">▶ YouTube</a>
+            </div>
+            <div style="font-size:12px;color:var(--text3)">Survival · 1.21.1+</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--border2);padding:6px 14px;border-radius:100px">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--text3)" id="hay-server-dot"></div>
+            <span style="font-size:12px;font-family:var(--font-display);font-weight:700" id="hay-status-text">Checking...</span>
+          </div>
+        </div>
+        <div style="padding:1.5rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem">
+          <div>
+            <div style="font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.75rem">Connection</div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem">
+              <div onclick="copyHayJava()" style="background:var(--panel2);border:1px solid var(--border2);border-radius:8px;padding:0.85rem 1rem;cursor:pointer;transition:border-color 0.2s" onmouseover="this.style.borderColor='rgba(124,111,255,0.4)'" onmouseout="this.style.borderColor='var(--border2)'">
+                <div style="font-size:10px;color:var(--text3);margin-bottom:3px">☕ JAVA</div>
+                <div style="font-family:var(--font-mono);font-size:12px;color:#a78bfa;word-break:break-all">america-wines.gl.joinmc.link</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:3px">Click to copy</div>
+              </div>
+              <div onclick="copyHayBedrock()" style="background:var(--panel2);border:1px solid var(--border2);border-radius:8px;padding:0.85rem 1rem;cursor:pointer;transition:border-color 0.2s" onmouseover="this.style.borderColor='rgba(124,111,255,0.4)'" onmouseout="this.style.borderColor='var(--border2)'">
+                <div style="font-size:10px;color:var(--text3);margin-bottom:3px">📱 BEDROCK</div>
+                <div style="font-family:var(--font-mono);font-size:12px;color:#a78bfa;word-break:break-all">team-seeker.gl.at.ply.gg</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:3px">Port: <strong style="color:#a78bfa">6169</strong> · Click to copy</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.75rem">Live Info</div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem">
+              <div style="display:flex;justify-content:space-between;background:var(--panel2);border:1px solid var(--border2);border-radius:6px;padding:0.75rem 1rem">
+                <span style="font-size:12px;color:var(--text3)">Players</span>
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:700" id="hay-players">—</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;background:var(--panel2);border:1px solid var(--border2);border-radius:6px;padding:0.75rem 1rem">
+                <span style="font-size:12px;color:var(--text3)">Version</span>
+                <span style="font-size:12px;font-weight:700">1.21.1+</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;background:var(--panel2);border:1px solid var(--border2);border-radius:6px;padding:0.75rem 1rem">
+                <span style="font-size:12px;color:var(--text3)">YouTube</span>
+                <a href="https://www.youtube.com/@Hay1335_" target="_blank" style="font-size:11px;color:#a78bfa;text-decoration:none">@Hay1335_ →</a>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.75rem">Features</div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem">
+              <a href="https://stats.excitdev.org" target="_blank" style="display:flex;align-items:center;gap:10px;background:var(--panel2);border:1px solid var(--border2);border-radius:8px;padding:0.75rem 1rem;text-decoration:none;color:var(--text2);font-size:12px;transition:border-color 0.2s" onmouseover="this.style.borderColor='rgba(124,111,255,0.4)'" onmouseout="this.style.borderColor='var(--border2)'">📊 Shared Stats Dashboard <span style="margin-left:auto;color:#a78bfa">→</span></a>
+              <div style="display:flex;align-items:center;gap:10px;background:var(--panel2);border:1px solid var(--border2);border-radius:8px;padding:0.75rem 1rem;font-size:12px;color:var(--text3)">🗺 World Map — Coming Soon</div>
+            </div>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(124,111,255,0.15);padding:1rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+          <span style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;white-space:nowrap">Online now:</span>
+          <div class="player-list" id="hay-player-list" style="flex:1"><span style="color:var(--text3);font-size:12px">Loading...</span></div>
+        </div>
+      </div>
+
+      <!-- Shared Rules -->
+      <div style="max-width:700px">
+        <div class="section-tag" style="margin-bottom:0.75rem">// Rules — apply to both servers</div>
+        <ul class="rules-list">
+          <li><span class="rule-num">#1</span><span class="rule-text">No griefing, stealing from, or destroying other players' builds.</span></li>
+          <li><span class="rule-num">#2</span><span class="rule-text">No hacking, X-ray, or cheats. Performance mods (Sodium, Optifine) are fine.</span></li>
+          <li><span class="rule-num">#3</span><span class="rule-text">Be respectful. No harassment, hate speech, or excessive profanity in chat.</span></li>
+          <li><span class="rule-num">#4</span><span class="rule-text">No spam or advertising other servers.</span></li>
+          <li><span class="rule-num">#5</span><span class="rule-text">Report bugs to staff — don't exploit them.</span></li>
+          <li><span class="rule-num">#6</span><span class="rule-text">Staff have final say. Disputes go through the help ticket system, not chat arguments.</span></li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
@@ -662,11 +717,11 @@
     <div class="footer-logo">EXCITDEV</div>
     <div class="footer-links">
       <a class="footer-link" onclick="showPage('home')">Home</a>
-      <a class="footer-link" onclick="showPage('server')">Server</a>
+      <a class="footer-link" onclick="showPage('server')">Servers</a>
       <a class="footer-link" onclick="showPage('discord')">Discord</a>
       <a class="footer-link" onclick="showPage('help')">Help</a>
     </div>
-    <div class="footer-copy">© 2025 ExcitDev. Not affiliated with Mojang or Microsoft.</div>
+    <div class="footer-copy">© 2025 ExcitDev · Not affiliated with Mojang or Microsoft.</div>
   </footer>
 </div>
 
@@ -945,13 +1000,23 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-// COPY IPs
-function copyJavaIP() {
-  navigator.clipboard.writeText('written-path.gl.joinmc.link').then(() => showToast('✓ Java IP copied!'));
+// COPY IPs — ExcitDev
+function copyExcitJava() {
+  navigator.clipboard.writeText('written-path.gl.joinmc.link').then(() => showToast('✓ ExcitDev Java IP copied!'));
 }
-function copyBedrockIP() {
-  navigator.clipboard.writeText('addition-commissions.gl.at.ply.gg').then(() => showToast('✓ Bedrock IP copied! Port: 21702'));
+function copyExcitBedrock() {
+  navigator.clipboard.writeText('addition-commissions.gl.at.ply.gg').then(() => showToast('✓ ExcitDev Bedrock IP copied! Port: 21702'));
 }
+// COPY IPs — Hay1335_
+function copyHayJava() {
+  navigator.clipboard.writeText('america-wines.gl.joinmc.link').then(() => showToast('✓ Hay1335_ Java IP copied!'));
+}
+function copyHayBedrock() {
+  navigator.clipboard.writeText('team-seeker.gl.at.ply.gg').then(() => showToast('✓ Hay1335_ Bedrock IP copied! Port: 6169'));
+}
+// Legacy aliases used in home page cards
+function copyJavaIP() { copyExcitJava(); }
+function copyBedrockIP() { copyExcitBedrock(); }
 
 // FOX GATE
 function checkFox() {
@@ -998,51 +1063,78 @@ function submitHelp() {
   document.getElementById('help-success').style.display = 'block';
 }
 
-// SERVER STATUS
-async function fetchStatus() {
+// SERVER STATUS — fetch both servers
+async function fetchServerStatus(ip, dotId, statusId, playersId, playerListId, checkedId, motdId) {
   try {
-    const res = await fetch('https://api.mcsrvstat.us/3/written-path.gl.joinmc.link');
+    const res = await fetch('https://api.mcsrvstat.us/3/' + ip);
     const data = await res.json();
     const online = data.online === true;
     const players = data.players ? data.players.online : 0;
     const max = data.players ? data.players.max : 0;
     const motd = data.motd && data.motd.clean ? data.motd.clean[0] : '';
-    const playerNames = data.players && data.players.list ? data.players.list.map(p => p.name || p) : [];
+    const names = data.players && data.players.list ? data.players.list.map(p => p.name || p) : [];
 
-    const dot = document.getElementById('hero-status-dot');
-    dot.className = 'status-dot ' + (online ? 'online' : 'offline');
-    document.getElementById('hero-status-text').textContent = online ? 'Online' : 'Offline';
-    document.getElementById('hero-players').textContent = online ? players + ' / ' + max + ' players online' : 'Server is currently offline';
+    const dot = document.getElementById(dotId);
+    if (dot) { dot.style.background = online ? 'var(--green)' : 'var(--red)'; if (online) dot.style.boxShadow = '0 0 6px var(--green)'; else dot.style.boxShadow = 'none'; }
 
-    const sdot = document.getElementById('server-dot');
-    sdot.style.background = online ? 'var(--green)' : 'var(--red)';
-    if (online) sdot.style.boxShadow = '0 0 8px var(--green)';
-    document.getElementById('server-status-text').textContent = online ? 'Online' : 'Offline';
-    if (document.getElementById('server-motd')) document.getElementById('server-motd').textContent = motd;
-    document.getElementById('info-players').textContent = players + ' / ' + max;
-    document.getElementById('info-checked').textContent = new Date().toLocaleTimeString();
+    const stEl = document.getElementById(statusId);
+    if (stEl) { stEl.textContent = online ? 'Online' : 'Offline'; stEl.style.color = online ? 'var(--green)' : 'var(--red)'; }
 
-    const pl = document.getElementById('player-list');
-    if (playerNames.length > 0) {
-      pl.innerHTML = playerNames.map(n => `<div class="player-tag"><div class="player-dot"></div>${n}</div>`).join('');
-    } else {
-      pl.innerHTML = online ? '<div style="color:var(--text3);font-size:13px">No player names exposed by API</div>'
-                           : '<div style="color:var(--text3);font-size:13px">Server offline</div>';
+    const plEl = document.getElementById(playersId);
+    if (plEl) plEl.textContent = online ? players + ' / ' + max : '—';
+
+    const plList = document.getElementById(playerListId);
+    if (plList) {
+      if (names.length > 0) plList.innerHTML = names.map(n => `<div class="player-tag"><div class="player-dot"></div>${n}</div>`).join('');
+      else plList.innerHTML = `<span style="color:var(--text3);font-size:12px">${online ? 'No names exposed by API' : 'Server offline'}</span>`;
     }
 
-    document.getElementById('ctrl-players').textContent = online ? players + '/' + max : '—';
-    document.getElementById('ctrl-players-sub').textContent = online ? 'players online now' : 'Server offline';
+    const chkEl = document.getElementById(checkedId);
+    if (chkEl) chkEl.textContent = new Date().toLocaleTimeString();
 
+    const motdEl = document.getElementById(motdId);
+    if (motdEl) motdEl.textContent = motd;
+
+    return { online, players, max };
   } catch(e) {
-    ['hero-status-text','server-status-text'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.textContent = 'Could not reach API';
-    });
+    const stEl = document.getElementById(statusId);
+    if (stEl) { stEl.textContent = 'Error'; stEl.style.color = 'var(--text3)'; }
+    return null;
   }
 }
 
-fetchStatus();
-setInterval(fetchStatus, 30000);
+async function fetchAllStatus() {
+  // ExcitDev server
+  const excit = await fetchServerStatus(
+    'written-path.gl.joinmc.link',
+    'server-dot', 'server-status-text', 'info-players', 'player-list', 'info-checked', 'server-motd'
+  );
+  // Update home page ExcitDev mini-status
+  const hDot = document.getElementById('home-dot-excit');
+  const hSt = document.getElementById('home-status-excit');
+  if (excit && hDot && hSt) {
+    hDot.style.background = excit.online ? 'var(--green)' : 'var(--red)';
+    hSt.textContent = excit.online ? excit.players + '/' + excit.max + ' online' : 'Offline';
+    hSt.style.color = excit.online ? 'var(--green)' : 'var(--text3)';
+  }
+
+  // Hay1335_ server
+  const hay = await fetchServerStatus(
+    'america-wines.gl.joinmc.link',
+    'hay-server-dot', 'hay-status-text', 'hay-players', 'hay-player-list', null, null
+  );
+  // Update home page Hay1335 mini-status
+  const hDot2 = document.getElementById('home-dot-hay');
+  const hSt2 = document.getElementById('home-status-hay');
+  if (hay && hDot2 && hSt2) {
+    hDot2.style.background = hay.online ? 'var(--green)' : 'var(--red)';
+    hSt2.textContent = hay.online ? hay.players + '/' + hay.max + ' online' : 'Offline';
+    hSt2.style.color = hay.online ? 'var(--green)' : 'var(--text3)';
+  }
+}
+
+fetchAllStatus();
+setInterval(fetchAllStatus, 30000);
 </script>
 </body>
 </html>
